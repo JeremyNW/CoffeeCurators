@@ -11,6 +11,8 @@
 		B5665ED32899999200A7942F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5665ED22899999200A7942F /* ContentView.swift */; };
 		B5665ED52899999400A7942F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5665ED42899999400A7942F /* Assets.xcassets */; };
 		B5665ED82899999400A7942F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5665ED72899999400A7942F /* Preview Assets.xcassets */; };
+		B668DC11289B14E800561322 /* NewRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668DC10289B14E800561322 /* NewRecipeView.swift */; };
+		B668DC15289B232D00561322 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668DC14289B232D00561322 /* RecipeDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		B5665ED22899999200A7942F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B5665ED42899999400A7942F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5665ED72899999400A7942F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B668DC10289B14E800561322 /* NewRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipeView.swift; sourceTree = "<group>"; };
+		B668DC14289B232D00561322 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 				B5665ED22899999200A7942F /* ContentView.swift */,
 				B5665ED42899999400A7942F /* Assets.xcassets */,
 				B5665ED62899999400A7942F /* Preview Content */,
+				B668DC10289B14E800561322 /* NewRecipeView.swift */,
+				B668DC14289B232D00561322 /* RecipeDetailView.swift */,
 			);
 			path = CoffeeCurator;
 			sourceTree = "<group>";
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B668DC11289B14E800561322 /* NewRecipeView.swift in Sources */,
 				B5665ED32899999200A7942F /* ContentView.swift in Sources */,
 				B5665ED12899999200A7942F /* CoffeeCuratorApp.swift in Sources */,
+				B668DC15289B232D00561322 /* RecipeDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
