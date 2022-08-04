@@ -26,7 +26,7 @@ struct CoffeeCuratorApp: App {
 
   var body: some Scene {
       WindowGroup {
-          HomeScreen().environmentObject(AuthViewModel.shared)
+          ContentView()
              
       }
     }
