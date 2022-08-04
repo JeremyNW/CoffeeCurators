@@ -66,18 +66,18 @@ struct HomeScreen: View {
             }
         .tabItem {
             Image(systemName: "house.fill")
-            Text("Home")
+            HomeScreen()
             }
       
             Text("Favorite Tab")
                 .tabItem {
                     Image(systemName: "heart.fill")
-                    Text("Favorite")
+                   SignUpView()
                 }
             Text("Profile Tab")
                 .tabItem {
                     Image(systemName: "person")
-                    Text("Profile")
+                    RecipeDetailView()
                 }
         
         }.accentColor(.primary)
