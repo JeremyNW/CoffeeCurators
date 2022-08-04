@@ -9,6 +9,12 @@ import SwiftUI
 
 struct HomeScreen: View {
     
+    @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
+    
+//    @State private var coffeeName = ""
+//
+//    @State private var coffeeName = ""
+    
     var body: some View {
             NavigationView {
             ZStack {
@@ -29,7 +35,7 @@ struct HomeScreen: View {
                         }
                     }
                     List {
-                        ForEach(0..<10) { recipe in
+                        ForEach(viewModel.recipes, id: \.self) { recipe in
                             NavigationLink{
 
                             }
@@ -44,24 +50,27 @@ struct HomeScreen: View {
                         }
                         HStack{
                             VStack {
-                                Text("Beverage Name")
+                                Text(recipe.coffeeName)
                                     .font(.title3)
                                     .padding(.bottom, 5)
                                     .foregroundColor(.white)
-                                Text("Milk, espresso, etc...")
-                                    .padding(.bottom, 3)
-                                    .foregroundColor(.white)
-                                Text("Steam milk and add espresso shot .....")
+//                                Text("Milk, espresso, etc...")
+//                                    .padding(.bottom, 3)
+//                                    .foregroundColor(.white)
+                                Text(recipe.directions)
                                     .foregroundColor(.white)
                             }
                         }
                     }
                 }.listRowBackground(Color("Background_color"))
-                }
+                        }
+//                        .onDelete(perform: viewModel.delete)
             }.listStyle(.plain)
                 }
                 .background(Color("Background_color"))
 
+            }.onAppear() {
+                self.viewModel.fetchRecipes()
             }
         }
 

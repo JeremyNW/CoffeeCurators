@@ -9,8 +9,10 @@ import SwiftUI
 
 struct NewRecipeView: View {
     
-    @State private var recipeName = ""
-    @State private var description = "Recipe Description goes here.."
+    @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
+    
+    @State private var coffeeName = ""
+    @State private var directions = "Recipe Description goes here.."
     
     var body: some View {
         VStack {
@@ -33,19 +35,19 @@ struct NewRecipeView: View {
                 }
                 .offset(x: 115, y: -90)
             }
-            TextField("Recipe Name...", text: $recipeName)
+            TextField("Recipe Name...", text: $coffeeName)
                 .textFieldStyle(.roundedBorder)
                 .frame(width: 300)
                 .padding()
             
-            TextEditor(text: $description)
+            TextEditor(text: $directions)
                 
                 .frame(width: 300, height: 200, alignment: .topLeading)
                 .padding()
                 .border(Color.gray)
                 .cornerRadius(20)
             Button{
-                print("Button pressed")
+                viewModel.addRecipe(coffeeName: coffeeName, directions: directions)
             } label: {
                 Text("Save")
                     .padding(15)
