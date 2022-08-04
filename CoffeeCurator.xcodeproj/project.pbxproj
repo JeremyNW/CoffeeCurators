@@ -27,6 +27,8 @@
 		B5665ED32899999200A7942F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5665ED22899999200A7942F /* ContentView.swift */; };
 		B5665ED52899999400A7942F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5665ED42899999400A7942F /* Assets.xcassets */; };
 		B5665ED82899999400A7942F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5665ED72899999400A7942F /* Preview Assets.xcassets */; };
+		B57B49DA289C2902004370E8 /* FavoriteRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B49D9289C2902004370E8 /* FavoriteRecipes.swift */; };
+		B57B49DC289C3250004370E8 /* ProfileTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B49DB289C3250004370E8 /* ProfileTab.swift */; };
 		B668DC11289B14E800561322 /* NewRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668DC10289B14E800561322 /* NewRecipeView.swift */; };
 		B668DC15289B232D00561322 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668DC14289B232D00561322 /* RecipeDetailView.swift */; };
 /* End PBXBuildFile section */
@@ -43,6 +45,8 @@
 		B5665ED22899999200A7942F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B5665ED42899999400A7942F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5665ED72899999400A7942F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B57B49D9289C2902004370E8 /* FavoriteRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipes.swift; sourceTree = "<group>"; };
+		B57B49DB289C3250004370E8 /* ProfileTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTab.swift; sourceTree = "<group>"; };
 		B668DC10289B14E800561322 /* NewRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipeView.swift; sourceTree = "<group>"; };
 		B668DC14289B232D00561322 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,7 +102,12 @@
 				6FF8F871289B2376004FB90E /* SignInView.swift */,
 				6FF8F873289B271B004FB90E /* SignUpView.swift */,
 				B55CF36B289B34FC00E1E5B6 /* HomeScreen.swift */,
+
 				6FF8F890289C30B5004FB90E /* AuthModel.swift */,
+
+				B57B49D9289C2902004370E8 /* FavoriteRecipes.swift */,
+				B57B49DB289C3250004370E8 /* ProfileTab.swift */,
+
 			);
 			path = CoffeeCurator;
 			sourceTree = "<group>";
@@ -202,10 +211,15 @@
 				6FF8F874289B271C004FB90E /* SignUpView.swift in Sources */,
 				B5665ED12899999200A7942F /* CoffeeCuratorApp.swift in Sources */,
 				B55CF36C289B34FC00E1E5B6 /* HomeScreen.swift in Sources */,
+				B57B49DC289C3250004370E8 /* ProfileTab.swift in Sources */,
 				B668DC15289B232D00561322 /* RecipeDetailView.swift in Sources */,
 				6FF8F872289B2377004FB90E /* SignInView.swift in Sources */,
 				6FF8F870289B1488004FB90E /* ZeroPageView.swift in Sources */,
+
 				6FF8F891289C30B5004FB90E /* AuthModel.swift in Sources */,
+
+				B57B49DA289C2902004370E8 /* FavoriteRecipes.swift in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,10 +8,41 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        Text("Hello, world!")
-            .padding()
-    }
+    
+    @State private var selection = 0
+
+        var body: some View {
+            TabView(selection: $selection) {
+                HomeScreen()
+                    .font(.title)
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "house.fill")
+                            Text("Home")
+                        }
+                    }
+                    .tag(0)
+                FavoriteRecipes()
+                    .font(.title)
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "heart")
+                            Text("Favorites")
+                        }
+                    }
+                    .tag(1)
+                ProfileTab()
+                    .font(.title)
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "person")
+                            Text("Profile")
+                        }
+                    }
+                    .tag(2)
+            }.accentColor(.primary)
+
+        }
 }
 
 struct ContentView_Previews: PreviewProvider {
