@@ -1,35 +1,23 @@
 //
-//  HomeScreen.swift
+//  FavoriteRecipes.swift
 //  CoffeeCurator
 //
-//  Created by Viktoriya Kudryashova on 8/3/22.
+//  Created by Viktoriya Kudryashova on 8/4/22.
 //
 
 import SwiftUI
 
-struct HomeScreen: View {
-    
+struct FavoriteRecipes: View {
     var body: some View {
-            NavigationView {
+        NavigationView{
             ZStack {
                 VStack {
-                    HStack {
-                        Text("FIND THE BEST RECIPE")
-                            .padding()
-                            .font(.title)
+                    Text("Favorite Recipes")
+                        .font(.title)
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
-                    }.toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Button(action: {
-//                                showSheet.toggle()
-                            }, label: {
-                                Image(systemName: "plus")
-                                    .foregroundColor(.white)
-                            })
-                        }
-                    }
                     List {
-                        ForEach(0..<10) { recipe in
+                        ForEach(0..<6) { recipe in
                             NavigationLink{
 
                             }
@@ -46,28 +34,31 @@ struct HomeScreen: View {
                             VStack {
                                 Text("Beverage Name")
                                     .font(.title3)
-                                    .padding(.bottom, 5)
-                                    .foregroundColor(.white)
+                                .foregroundColor(.white)
+                                .padding(.bottom, 5)
                                 Text("Milk, espresso, etc...")
                                     .padding(.bottom, 3)
                                     .foregroundColor(.white)
                                 Text("Steam milk and add espresso shot .....")
                                     .foregroundColor(.white)
                             }
+                            Image(systemName: "heart")
+                                .foregroundColor(.white)
+                                .padding()
                         }
                     }
-                }.listRowBackground(Color("Background_color"))
                 }
-            }.listStyle(.plain)
-                }
-                .background(Color("Background_color"))
             }
-        }
+                .listRowBackground(Color("Background_color"))
+                 
+                    }.listStyle(.plain)
+                }
+            }.background(Color("Background_color"))
+         }
     }
 }
-
-struct HomeScreen_Previews: PreviewProvider {
+struct FavoriteRecipes_Previews: PreviewProvider {
     static var previews: some View {
-        HomeScreen()
+        FavoriteRecipes()
     }
 }
