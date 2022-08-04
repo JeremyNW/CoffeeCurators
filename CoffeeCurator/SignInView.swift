@@ -16,8 +16,8 @@ import SwiftUI
 struct SignInView: View {
     @State var email = ""
     @State var password = ""
-    //
-    //@EnvironmentObject var viewModel: CoffeeCuratorViewModel
+    
+    @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
         NavigationView {
@@ -49,7 +49,7 @@ struct SignInView: View {
                         guard !email.isEmpty, !password.isEmpty else {
                             return
                         }
-                        //                    viewModel.signIn(email:email, password: password)
+                                            viewModel.signIn(email:email, password: password)
                         print("SIGN IN")
                     }, label: {
                         Text("Sign In")
@@ -59,7 +59,7 @@ struct SignInView: View {
                             .background(Color("sendAnInvite_button_light_brown"))
                         
                     })  .cornerRadius(40)
-                    NavigationLink(destination: Text("SignUpView"), label: {
+                    NavigationLink(destination: SignUpView(), label: {
                         Text("Don't have an account yet?")
                             .foregroundColor(Color("NoAccountYet"))
                     })

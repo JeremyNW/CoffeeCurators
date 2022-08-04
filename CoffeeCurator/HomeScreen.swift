@@ -61,8 +61,10 @@ struct HomeScreen: View {
             }.listStyle(.plain)
                 }
                 .background(Color("Background_color"))
+
             }
         }
+
     }
 }
 

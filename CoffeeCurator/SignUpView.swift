@@ -14,7 +14,7 @@ import SwiftUI
 //import Firebase
 
 struct SignUpView: View {
-//    @EnvironmentObject var viewModel: CoffeeCuratorViewModel
+    @EnvironmentObject var viewModel: AuthViewModel
 //    @Environment(\.presentationMode) var mode
     
     @State var email = ""
@@ -82,7 +82,7 @@ struct SignUpView: View {
                             return
                         }
                         
-//                        viewModel.signUp(email: email, password: password, userName: userName, age: age, location: location, sports: sports, bio: bio)
+                        viewModel.signUp(email: email, password: password, userName: userName)
                        
 
                     }, label: {
