@@ -12,6 +12,7 @@ struct CoffeeCuratorApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            
         }
     }
 }
