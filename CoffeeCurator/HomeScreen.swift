@@ -11,19 +11,19 @@ struct HomeScreen: View {
     
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
     
-//    @State private var coffeeName = ""
-//
-//    @State private var coffeeName = ""
+    //    @State private var coffeeName = ""
+    //
+    //    @State private var coffeeName = ""
     
     var body: some View {
-            NavigationView {
+        NavigationView {
             ZStack {
                 VStack {
                     HStack {
                         Text("FIND THE BEST RECIPE")
                             .padding()
                             .font(.title)
-                        .foregroundColor(.white)
+                            .foregroundColor(.white)
                     }.toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
@@ -37,54 +37,56 @@ struct HomeScreen: View {
                     List {
                         ForEach(viewModel.recipes, id: \.self) { recipe in
                             NavigationLink{
-
+                                
                             }
-                            label: {
-                    HStack{
-                        HStack {
-                            Image(systemName: "photo")
-                                .resizable()
-                                .frame(width: 100, height: 100, alignment: .leading)
-                                .foregroundColor(.white)
-                                .padding()
-                        }
-                        HStack{
-                            VStack {
-                                Text(recipe.coffeeName)
-                                    .font(.title3)
-                                    .padding(.bottom, 5)
-                                    .foregroundColor(.white)
-//                                Text("Milk, espresso, etc...")
-//                                    .padding(.bottom, 3)
-//                                    .foregroundColor(.white)
-                                Text(recipe.directions)
-                                    .foregroundColor(.white)
+                        label: {
+                            HStack{
+                                HStack {
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .frame(width: 100, height: 100, alignment: .leading)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                }
+                                HStack{
+                                    VStack {
+                                        Text(recipe.coffeeName)
+                                            .font(.title3)
+                                            .padding(.bottom, 5)
+                                            .foregroundColor(.white)
+                                        //                                Text("Milk, espresso, etc...")
+                                        //                                    .padding(.bottom, 3)
+                                        //                                    .foregroundColor(.white)
+                                        Text(recipe.directions)
+                                            .foregroundColor(.white)
+                                    }
+                                }
                             }
+                        }.listRowBackground(Color("Background_color"))
                         }
-                    }
-                }.listRowBackground(Color("Background_color"))
-                        }
-//                        .onDelete(perform: viewModel.delete(indexSet: , completion: { _ in
-//                            print("Deleted successfully")
-//                        }))
+                        .onDelete(perform: viewModel.delete)
+          
                     }
                     .listStyle(.plain)
                     .onAppear() {
-                                    self.viewModel.fetchRecipes()
-                                }
+                        self.viewModel.fetchRecipes()
+                    }
+                    
                 }
-                }.background(Color("Background_color"))
-            }
+            }.background(Color("Background_color"))
+                
+        }
     }
+    
     
 }
 //                        .onDelete { indexSet in
 //                            self.viewModel.delete(recipe: viewModel.recipes.id, completion: <#T##((Bool) -> Void)?#>)
 
-      
 
 
-                            
+
+
 
 
 
