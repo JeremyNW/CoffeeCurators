@@ -16,7 +16,7 @@ import FirebaseFirestoreSwift
 class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     
     @Published var recipes = [Recipe]()
-    
+    @Published var users = [User]()
     @Published var didRegister = false
     @Published var didAuthenticateUser = false
     @Published var currentUser: User?
@@ -24,6 +24,15 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     private var tempCurrentUser: FirebaseAuth.User?
     
     static let shared = CoffeeCuratorsViewModel()
+    
+    override init() {
+        super.init()
+    
+        tempCurrentUser = nil
+        userSession = Auth.auth().currentUser
+        fetchUser()
+       
+    }
 
         func addRecipe(coffeeName: String, directions: String) {
     
@@ -49,11 +58,11 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
                 self.recipes = documents.map { (queryDocumentSnapshot) -> Recipe in
                    
                     let data = queryDocumentSnapshot.data()
-                    let id = data["id"] as? String ?? ""
-                    let coffeeName = data["coffeeName"] as? String ?? ""
-                    let directions = data["directions"] as? String ?? ""
+                    let uid = data["uid"] as? String ?? ""
+//                    let coffeeName = data["coffeeName"] as? String ?? ""
+//                    let directions = data["directions"] as? String ?? ""
                     
-                    return Recipe(coffeeName: coffeeName, directions: directions)
+                    return Recipe(DocumentID: uid, id: uid, data: data)
             }
     }
     }
@@ -145,26 +154,6 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     }
     
     
-//    func fetchUser() {
-//        guard let uid = self.userSession?.uid else {return}
-//
-//        UserService.fetchUser(withUid: uid) {user in
-//
-//            self.currentUser = user
-//        }
-//    }
-//
-//    struct UserService {
-//
-//        static func fetchUser(withUid uid: String, completion: @escaping(User) -> Void) {
-//            Firestore.firestore().collection("users")
-//                .document(uid)
-//                .getDocument { snapshot, _ in
-//                guard let user = try? snapshot?.data(as: User.self) else { return }
-//                completion(user)
-//            }
-//        }
-//    }
     
     func signout() {
         self.userSession = nil
@@ -183,12 +172,7 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
 //
 //              completion?(true)
 //            }
-//
-//
-//
 //        }
-//
-//
 //         }
     
     

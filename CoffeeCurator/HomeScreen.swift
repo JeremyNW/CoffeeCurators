@@ -15,6 +15,8 @@ struct HomeScreen: View {
 //
 //    @State private var coffeeName = ""
     
+    let recipe = [Recipe]()
+    
     var body: some View {
             NavigationView {
             ZStack {
@@ -64,6 +66,9 @@ struct HomeScreen: View {
                     }
                 }.listRowBackground(Color("Background_color"))
                         }
+                        
+//                        .onDelete(perform: viewModel.deleteData(recipeToDelete: self.recipe?))
+                        
 //                        .onDelete(perform: viewModel.delete(indexSet: , completion: { _ in
 //                            print("Deleted successfully")
 //                        }))
