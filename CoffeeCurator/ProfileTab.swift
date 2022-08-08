@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ProfileTab: View {
+    
+    @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
+    
     var body: some View {
         NavigationView{
            ZStack {
@@ -56,6 +59,23 @@ struct ProfileTab: View {
                        }.foregroundColor(.white)
                        
                    }.listStyle(.plain)
+                   
+                   Button(action: {
+                       
+                       viewModel.signout()
+                   }) {
+                       
+                       ZStack {
+                           RoundedRectangle(cornerRadius: 15)
+                               .frame(width: 280, height: 35)
+                               .foregroundColor(Color("dirty_light_pink"))
+                           
+                           Text("Sign Out")
+                               .font((.system(size: 15, weight: .semibold, design: .default))
+                               )
+                       }
+                   }
+                   .padding(30)
                }.background(Color("Background_color"))
            }
         }

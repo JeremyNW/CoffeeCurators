@@ -16,6 +16,23 @@ import FirebaseFirestoreSwift
 class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     
     @Published var recipes = [Recipe]()
+    @Published var users = [User]()
+    @Published var didRegister = false
+    @Published var didAuthenticateUser = false
+    @Published var currentUser: User?
+    @Published var userSession: FirebaseAuth.User?
+    private var tempCurrentUser: FirebaseAuth.User?
+    
+    static let shared = CoffeeCuratorsViewModel()
+    
+    override init() {
+        super.init()
+    
+        tempCurrentUser = nil
+        userSession = Auth.auth().currentUser
+        fetchUser()
+       
+    }
 
         func addRecipe(coffeeName: String, directions: String) {
     
@@ -23,7 +40,7 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     
             db.collection("recipe").addDocument(data: [
                 "coffeeName": coffeeName,
-                "directions": directions
+                "directions": directions,
                 
             ])
         }
@@ -41,16 +58,111 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
                 self.recipes = documents.map { (queryDocumentSnapshot) -> Recipe in
                    
                     let data = queryDocumentSnapshot.data()
-                    let id = data["id"] as? String ?? ""
-                    let coffeeName = data["coffeeName"] as? String ?? ""
-                    let directions = data["directions"] as? String ?? ""
+                    let uid = data["uid"] as? String ?? ""
+//                    let coffeeName = data["coffeeName"] as? String ?? ""
+//                    let directions = data["directions"] as? String ?? ""
                     
-                    return Recipe(id: id, coffeeName: coffeeName, directions: directions)
+                    return Recipe(DocumentID: uid, id: uid, data: data)
             }
     }
     }
     
-//    func delete(at offsets: IndexSet) {
+    func signUp(email: String, password: String, userName: String) {
+        
+        let auth = Auth.auth()
+        
+        auth.createUser(withEmail: email, password: password) {
+            result, error in
+            if let error = error {
+                print("*********Failed to create user:", error)
+                return
+            }
+            
+                      guard let user = result?.user else {return}
+            self.tempCurrentUser = user
+            
+
+            let data: [String: Any] = ["email": email,
+                                  "userName": userName.lowercased(),
+                                       "uid": user.uid]
+                      
+            Firestore.firestore().collection("users").document(user.uid)
+                .setData(data) { _ in
+              
+                    self.didAuthenticateUser = true
+                    self.didRegister = true
+                }
+        }
+        
+    }
+       
+    func signIn(email: String, password: String) {
+        
+        let auth = Auth.auth()
+       
+        auth.signIn(withEmail: email, password: password) {[weak self] result, error in
+            guard result != nil, error == nil else {
+                        return
+                    }
+            
+            guard let user = result?.user else { return }
+            self?.userSession = user
+//            self?.fetchUser()
+            
+        }
+    }
+    
+    func uploadProfilePhoto(_ profilePicture: UIImage) {
+        
+        
+        guard let uid = tempCurrentUser?.uid else {return}
+        
+        PhotoUploader.uploadPhoto(image: profilePicture) { profilePictureUrl in
+            Firestore.firestore().collection("users")
+                .document(uid)
+                .updateData(["profilePictureUrl": profilePictureUrl]) { _ in
+                    self.userSession = self.tempCurrentUser
+                    self.fetchUser()
+                }
+        }
+    }
+    
+    func fetchUser() {
+        guard let uid = self.userSession?.uid else {return}
+        
+        UserService.fetchUser(withUid: uid) {user in
+            
+            self.currentUser = user
+        }
+    }
+    
+    struct UserService {
+        
+        static func fetchUser(withUid uid: String, completion: @escaping(User) -> Void) {
+            Firestore.firestore().collection("users")
+                .document(uid)
+                .getDocument { snapshot, _ in
+                guard let user = try? snapshot?.data(as: User.self) else {
+                    print("Failed to Fetch user....")
+                    
+                    return
+                    
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    
+    
+    func signout() {
+        self.userSession = nil
+        try? Auth.auth().signOut()
+    }
+    
+}
+    
+//    func delete(indexSet: IndexSet, completion: ((Bool) -> Void)?) {
 //        let db = Firestore.firestore()
 //        offsets.map { recipes[$0] }.forEach { recipe in
 //        guard let recipeID = recipe.id else { return }
@@ -61,9 +173,8 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
 //            print("Document successfully removed!")
 //          }
 //        }
-//      }
 //    }
 
 
-}
+
         

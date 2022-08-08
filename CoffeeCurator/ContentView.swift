@@ -6,6 +6,29 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseFirestore
+import Foundation
+import Firebase
+
+struct AuthenticationLogicView: View {
+    
+    @EnvironmentObject var viewModel: CoffeeCuratorsViewModel
+    
+    var body: some View {
+//                if viewModel.didAuthenticateUser != true {
+      
+        if viewModel.userSession != nil  {
+           ContentView()
+        }
+        else {
+            ZeroPageView()
+        }
+        
+      
+    }
+}
 
 struct ContentView: View {
     

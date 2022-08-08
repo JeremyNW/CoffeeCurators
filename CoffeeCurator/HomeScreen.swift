@@ -15,6 +15,8 @@ struct HomeScreen: View {
 //
 //    @State private var coffeeName = ""
     
+    let recipe = [Recipe]()
+    
     var body: some View {
             NavigationView {
             ZStack {
@@ -47,10 +49,7 @@ struct HomeScreen: View {
 //                        }
             }.listStyle(.plain)
                 }
-                .background(Color("Background_color"))
-
-            }.onAppear() {
-                self.viewModel.fetchRecipes()
+                }.background(Color("Background_color"))
             }
         }
     }

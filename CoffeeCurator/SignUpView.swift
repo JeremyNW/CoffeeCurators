@@ -14,26 +14,24 @@ import SwiftUI
 //import Firebase
 
 struct SignUpView: View {
-    @EnvironmentObject var viewModel: AuthViewModel
-//    @Environment(\.presentationMode) var mode
+    @EnvironmentObject var viewModel: CoffeeCuratorsViewModel
+    @Environment(\.presentationMode) var mode
     
     @State var email = ""
     @State var password = ""
     @State private var userName = ""
-//
-//    @State private var selectedPicture: UIImage?
-//    @State private var picture: Image?
+    @State private var selectedPicture: UIImage?
+    @State private var picture: Image?
     
-//    @State private var isShowingPhotoPicker = false
-    
+    @State private var isShowingPhotoPicker = false
 
     var body: some View {
         
         NavigationView {
         VStack {
-//            NavigationLink(destination: ProfilePhotoSelectorView(),
-//                           isActive: $viewModel.didRegister,
-//                           label: {} )
+            NavigationLink(destination: ProfilePhotoSelectorView(),
+                           isActive: $viewModel.didRegister,
+                           label: {} )
             
             VStack {
                 Text("Let's create your profile!")
@@ -43,14 +41,6 @@ struct SignUpView: View {
                 .padding()
                 
                 VStack {
-                    
-//                    Image(uiImage: selectedPicture!)
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 50, height: 50)
-//                        .clipShape(Circle())
-//                        .padding()
-//                        .onTapGesture { isShowingPhotoPicker = true }
                     
                     TextField("Email Address", text: $email)
                         .disableAutocorrection(true)
@@ -87,10 +77,10 @@ struct SignUpView: View {
 
                     }, label: {
                         Text("Create Account")
-                            .foregroundColor(Color("champagne_button"))
+                        
                             .fontWeight(.bold)
                             .frame(width: 350, height: 40)
-                            .background(Color("sendAnInvite_button_light_brown"))
+                          
                     }).cornerRadius(40)
                 NavigationLink(destination: SignInView(), label: {
                     Text("Have an account already?")
@@ -98,22 +88,35 @@ struct SignUpView: View {
                 })
                         .padding()
                         .foregroundColor(.white)
-                }
-//            .sheet(isPresented: $isShowingPhotoPicker, content: {
-//                    ProfilePhotoSelectorView()
-     
-                  
-              
+            }.padding()
+                .background(Color("Background_color"))
+            Spacer()
+            .sheet(isPresented: $isShowingPhotoPicker, content: {
+                    ProfilePhotoSelectorView()
+                })
+                .padding(10)
         
                 Spacer()
-            }  .background(Color("Background_color"))
+            }
+            
+            
+        .onAppear(perform: {
+                viewModel.didRegister = false
+            })
    
     }
-//    }
+
     }
 
 }
     
+extension SignUpView {
+ func loadPhoto() {
+     
+     guard let selectedPicture = selectedPicture else {return}
+    picture = Image(uiImage: selectedPicture)
+ }
+}
 
 
 struct SignUpView_Previews: PreviewProvider {

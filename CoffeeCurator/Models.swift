@@ -15,7 +15,7 @@ import FirebaseFirestoreSwift
 
 
 
-struct Recipe: Codable, Identifiable, Hashable {
+struct Recipe: Identifiable, Hashable, Decodable {
     
     @DocumentID var id: String? 
     var coffeeName: String
@@ -25,14 +25,23 @@ struct Recipe: Codable, Identifiable, Hashable {
 //    var imageURL: String
 //    var userName: String
 //    var userImage: String
+    
+    init(DocumentID: String, id: String, data: [String: Any]) {
+        self.documentID = DocumentID
+        self.id = data["uid"] as?  String ?? ""
+        self.coffeeName = data["coffeeName"] as? String ?? ""
+        self.directions = data["directions"] as? String ?? ""
+    }
 }
 
 
-struct User: Codable, Identifiable {
+struct User:  Identifiable, Hashable, Decodable  {
    
     var id: String
    // @DocumentID var id: String?
     var userName: String
     var userImage: String
+    var profilePictureUrl: String
     
+    var isCurrentUser: Bool { return Auth.auth().currentUser?.uid == id }
 }
