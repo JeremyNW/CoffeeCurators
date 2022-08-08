@@ -17,7 +17,7 @@ struct SignInView: View {
     @State var email = ""
     @State var password = ""
     
-    @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var viewModel: CoffeeCuratorsViewModel
     
     var body: some View {
         NavigationView {

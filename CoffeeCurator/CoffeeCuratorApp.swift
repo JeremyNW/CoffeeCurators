@@ -26,7 +26,7 @@ struct CoffeeCuratorApp: App {
 
   var body: some Scene {
       WindowGroup {
-          ContentView().environmentObject(CoffeeCuratorsViewModel())
+      AuthenticationLogicView().environmentObject(CoffeeCuratorsViewModel())
              
       }
     }

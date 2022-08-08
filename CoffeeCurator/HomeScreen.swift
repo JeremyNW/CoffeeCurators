@@ -64,18 +64,30 @@ struct HomeScreen: View {
                     }
                 }.listRowBackground(Color("Background_color"))
                         }
-//                        .onDelete(perform: viewModel.delete)
-            }.listStyle(.plain)
+//                        .onDelete(perform: viewModel.delete(indexSet: , completion: { _ in
+//                            print("Deleted successfully")
+//                        }))
+                    }
+                    .listStyle(.plain)
+                    .onAppear() {
+                                    self.viewModel.fetchRecipes()
+                                }
                 }
-                .background(Color("Background_color"))
-
-            }.onAppear() {
-                self.viewModel.fetchRecipes()
+                }.background(Color("Background_color"))
             }
-        }
-
     }
+    
 }
+//                        .onDelete { indexSet in
+//                            self.viewModel.delete(recipe: viewModel.recipes.id, completion: <#T##((Bool) -> Void)?#>)
+
+      
+
+
+                            
+
+
+
 
 struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {

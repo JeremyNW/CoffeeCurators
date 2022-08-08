@@ -15,7 +15,7 @@ import FirebaseFirestoreSwift
 
 
 
-struct Recipe: Codable, Identifiable, Hashable {
+struct Recipe: Identifiable, Hashable, Decodable {
     
     @DocumentID var id: String?
     var coffeeName: String
@@ -28,11 +28,13 @@ struct Recipe: Codable, Identifiable, Hashable {
 }
 
 
-struct User: Codable, Identifiable {
+struct User:  Identifiable, Hashable, Decodable  {
    
     var id: String
    // @DocumentID var id: String?
     var userName: String
     var userImage: String
+    var profilePictureUrl: String
     
+    var isCurrentUser: Bool { return Auth.auth().currentUser?.uid == id }
 }
