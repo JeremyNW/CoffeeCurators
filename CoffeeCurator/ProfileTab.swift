@@ -68,7 +68,7 @@ struct ProfileTab: View {
                        ZStack {
                            RoundedRectangle(cornerRadius: 15)
                                .frame(width: 280, height: 35)
-                               .foregroundColor(Color("dirty_light_pink"))
+                            
                            
                            Text("Sign Out")
                                .font((.system(size: 15, weight: .semibold, design: .default))

@@ -41,19 +41,20 @@ struct HomeScreen: View {
                                 RecipeListCell(recipe: recipe)
                             
                             .listRowBackground(Color("Background_color"))
-                        }
+                    }.onAppear() {
+                        self.viewModel.fetchRecipes()
               
 //                        .onDelete { offset in
 //                            viewModel.recipes.remove(atOffsets: offset)
 //
 //                        }
             }.listStyle(.plain)
-                }
                 }.background(Color("Background_color"))
+                }
             }
         }
     
-
+}
 
 struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {
