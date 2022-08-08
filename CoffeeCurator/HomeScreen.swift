@@ -20,51 +20,31 @@ struct HomeScreen: View {
             ZStack {
                 VStack {
                     HStack {
-                        Text("FIND THE BEST RECIPE")
+                        Text("COFFEE RECIPES")
                             .padding()
                             .font(.title)
                         .foregroundColor(.white)
                     }.toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            Button(action: {
-//                                showSheet.toggle()
-                            }, label: {
+                            NavigationLink (
+                                destination: NewRecipeView()
+                            , label: {
                                 Image(systemName: "plus")
                                     .foregroundColor(.white)
                             })
                         }
                     }
-                    List {
-                        ForEach(viewModel.recipes, id: \.self) { recipe in
-                            NavigationLink{
-
-                            }
-                            label: {
-                    HStack{
-                        HStack {
-                            Image(systemName: "photo")
-                                .resizable()
-                                .frame(width: 100, height: 100, alignment: .leading)
-                                .foregroundColor(.white)
-                                .padding()
+                    List (viewModel.recipes, id: \.self) { recipe in
+                           
+                                RecipeListCell(recipe: recipe)
+                            
+                            .listRowBackground(Color("Background_color"))
                         }
-                        HStack{
-                            VStack {
-                                Text(recipe.coffeeName)
-                                    .font(.title3)
-                                    .padding(.bottom, 5)
-                                    .foregroundColor(.white)
-//                                Text("Milk, espresso, etc...")
-//                                    .padding(.bottom, 3)
-//                                    .foregroundColor(.white)
-                                Text(recipe.directions)
-                                    .foregroundColor(.white)
-                            }
-                        }
-                    }
-                }.listRowBackground(Color("Background_color"))
-                        }
-//                        .onDelete(perform: viewModel.delete)
+              
+//                        .onDelete { offset in
+//                            viewModel.recipes.remove(atOffsets: offset)
+//
+//                        }
             }.listStyle(.plain)
                 }
                 .background(Color("Background_color"))
@@ -73,9 +53,8 @@ struct HomeScreen: View {
                 self.viewModel.fetchRecipes()
             }
         }
-
     }
-}
+
 
 struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {

@@ -34,6 +34,7 @@
 		B668DC15289B232D00561322 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668DC14289B232D00561322 /* RecipeDetailView.swift */; };
 		B668DC1B289C530700561322 /* RecipeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668DC1A289C530700561322 /* RecipeDataStore.swift */; };
 		B668DC1D289C530E00561322 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668DC1C289C530E00561322 /* Models.swift */; };
+		B668DC1F28A1997900561322 /* RecipeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668DC1E28A1997900561322 /* RecipeListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		B668DC14289B232D00561322 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		B668DC1A289C530700561322 /* RecipeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDataStore.swift; sourceTree = "<group>"; };
 		B668DC1C289C530E00561322 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		B668DC1E28A1997900561322 /* RecipeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				B57B49D9289C2902004370E8 /* FavoriteRecipes.swift */,
 				B57B49DB289C3250004370E8 /* ProfileTab.swift */,
 				6F0CD0A6289C564C000637CE /* CoffeeCuratorsViewModel.swift */,
+				B668DC1E28A1997900561322 /* RecipeListCell.swift */,
 			);
 			path = CoffeeCurator;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				B668DC1D289C530E00561322 /* Models.swift in Sources */,
 				B5665ED32899999200A7942F /* ContentView.swift in Sources */,
 				6FF8F874289B271C004FB90E /* SignUpView.swift in Sources */,
+				B668DC1F28A1997900561322 /* RecipeListCell.swift in Sources */,
 				B668DC1B289C530700561322 /* RecipeDataStore.swift in Sources */,
 				B5665ED12899999200A7942F /* CoffeeCuratorApp.swift in Sources */,
 				B55CF36C289B34FC00E1E5B6 /* HomeScreen.swift in Sources */,
