@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Cormorant-Bold.ttf</string>
+		<string>Cormorant-Italic.ttf</string>
+		<string>Cormorant-Medium.ttf</string>
+		<string>Cormorant-SemiBold.ttf</string>
+		<string>Cormorant-Regular.ttf</string>
+		<string>Cormorant-Light.ttf</string>
+	</array>
+</dict>
+</plist>
