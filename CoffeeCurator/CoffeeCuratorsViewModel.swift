@@ -52,7 +52,7 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     
 //    func delete(at offsets: IndexSet) {
 //        let db = Firestore.firestore()
-//      offsets.map { recipes[$0] }.forEach { recipe in
+//        offsets.map { recipes[$0] }.forEach { recipe in
 //        guard let recipeID = recipe.id else { return }
 //        db.collection("recipe").document(recipeID).delete() { err in
 //          if let err = err {
