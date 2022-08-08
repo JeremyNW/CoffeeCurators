@@ -9,8 +9,10 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     
+    @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
     @State private var recipeName = ""
-    @State private var description = "Recipe Description blah blah blah blah blah blah "
+    @State private var directions = "Directions: "
+    
     var body: some View {
         VStack {
             Text("Coffee Recipe")
@@ -37,11 +39,13 @@ struct RecipeDetailView: View {
                 .frame(width: 300)
                 .padding()
             
-            TextEditor(text: $description)
-                .border(.gray)
-                .cornerRadius(20)
+            TextEditor(text: $directions)
                 .frame(width: 300, height: 200, alignment: .topLeading)
                 .padding()
+                .font(.system(size: 15))
+                .overlay( RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.secondary, lineWidth: 0.2)
+                    .frame(width: 300))
            
             Button{
                 print("Button pressed")

@@ -26,7 +26,7 @@ struct ProfileTab: View {
                            .foregroundColor(.white)
                    }
                    List {
-                       Section("Custom Recipes"){
+                       Section("My Custom Recipes"){
                        ForEach(0..<10) { recipe in
                            NavigationLink{
 
@@ -46,11 +46,7 @@ struct ProfileTab: View {
                                    .font(.title3)
                                    .padding(.bottom, 5)
                                    .foregroundColor(.white)
-                               Text("Milk, espresso, etc...")
-                                   .padding(.bottom, 3)
-                                   .foregroundColor(.white)
-                               Text("Steam milk and add espresso shot .....")
-                                   .foregroundColor(.white)
+                            
                         }
                     }
                 }
