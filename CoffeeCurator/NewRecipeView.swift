@@ -12,7 +12,7 @@ struct NewRecipeView: View {
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
     
     @State private var coffeeName = ""
-    @State private var directions = "Recipe Description goes here.."
+    @State private var directions = "Recipe: "
     
     var body: some View {
         VStack {
@@ -41,11 +41,12 @@ struct NewRecipeView: View {
                 .padding()
             
             TextEditor(text: $directions)
-                
                 .frame(width: 300, height: 200, alignment: .topLeading)
                 .padding()
-                .border(Color.gray)
-                .cornerRadius(20)
+                .font(.system(size: 15))
+                .overlay( RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.secondary, lineWidth: 0.2)
+                    .frame(width: 300))
             Button{
                 viewModel.addRecipe(coffeeName: coffeeName, directions: directions)
             } label: {

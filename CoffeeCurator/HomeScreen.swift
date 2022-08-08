@@ -15,20 +15,22 @@ struct HomeScreen: View {
     //
     //    @State private var coffeeName = ""
     
+    let recipe = [Recipe]()
+    
     var body: some View {
         NavigationView {
             ZStack {
                 VStack {
                     HStack {
-                        Text("FIND THE BEST RECIPE")
+                        Text("COFFEE RECIPES")
                             .padding()
                             .font(.title)
                             .foregroundColor(.white)
                     }.toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            Button(action: {
-//                                showSheet.toggle()
-                            }, label: {
+                            NavigationLink (
+                                destination: NewRecipeView()
+                            , label: {
                                 Image(systemName: "plus")
                                     .foregroundColor(.white)
                             })

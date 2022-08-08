@@ -16,7 +16,7 @@ import FirebaseFirestoreSwift
 class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     
     @Published var recipes = [Recipe]()
-    
+    @Published var users = [User]()
     @Published var didRegister = false
     @Published var didAuthenticateUser = false
     @Published var currentUser: User?
@@ -25,6 +25,26 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     
     let db = Firestore.firestore()
     static let shared = CoffeeCuratorsViewModel()
+    
+    override init() {
+        super.init()
+    
+        tempCurrentUser = nil
+        userSession = Auth.auth().currentUser
+        fetchUser()
+       
+    }
+
+        func addRecipe(coffeeName: String, directions: String) {
+    
+            let db = Firestore.firestore()
+    
+            db.collection("recipe").addDocument(data: [
+                "coffeeName": coffeeName,
+                "directions": directions,
+                
+            ])
+        }
     
     func addRecipe(coffeeName: String, directions: String) {
         db.collection("recipe").addDocument(data: [
@@ -168,6 +188,7 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     //            }
     //        }
     //    }
+
     
     func signout() {
         self.userSession = nil
@@ -175,6 +196,7 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     }
     
 }
+
 
 
 //    func deleteData(recipeToDelete: Recipe) {

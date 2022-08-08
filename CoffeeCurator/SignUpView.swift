@@ -77,10 +77,10 @@ struct SignUpView: View {
 
                     }, label: {
                         Text("Create Account")
-                            .foregroundColor(Color("champagne_button"))
+                        
                             .fontWeight(.bold)
                             .frame(width: 350, height: 40)
-                            .background(Color("sendAnInvite_button_light_brown"))
+                          
                     }).cornerRadius(40)
                 NavigationLink(destination: SignInView(), label: {
                     Text("Have an account already?")
