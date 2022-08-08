@@ -17,8 +17,7 @@ import FirebaseFirestoreSwift
 
 struct Recipe: Identifiable, Hashable, Decodable {
     
-    var id: String?
-    var documentID: String
+    @DocumentID var id: String? 
     var coffeeName: String
 //    var ingredients: String
     var directions: String

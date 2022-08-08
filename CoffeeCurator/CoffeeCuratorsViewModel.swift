@@ -164,34 +164,17 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     
 //    func delete(indexSet: IndexSet, completion: ((Bool) -> Void)?) {
 //        let db = Firestore.firestore()
-//        let recipeToDelete = db.collection("recipe").document(recipe.id!)
-//        recipeToDelete.delete() { error in
-//            if let error = error {
-//                print("Error removing recipe from Firebase \(error)")
-//            } else {
-//
-//              completion?(true)
-//            }
-//        }
-//         }
-    
-    
-//    func deleteData(recipeToDelete: Recipe) {
-//        let db = Firestore.firestore()
-//        db.collection("recipes").document(recipeToDelete.id!).delete { error in
-//
-//            if error == nil {
-//
-//                DispatchQueue.main.async {
-//
-//                    self.recipes.removeAll { recipe in
-//
-//                    return recipe.id == recipeToDelete.id
-//                }
-//                }
-//            }
+//        offsets.map { recipes[$0] }.forEach { recipe in
+//        guard let recipeID = recipe.id else { return }
+//        db.collection("recipe").document(recipeID).delete() { err in
+//          if let err = err {
+//            print("Error removing document: \(err)")
+//          } else {
+//            print("Document successfully removed!")
+//          }
 //        }
 //    }
+
 
 
         
