@@ -59,10 +59,10 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
                    
                     let data = queryDocumentSnapshot.data()
                     let uid = data["uid"] as? String ?? ""
-//                    let coffeeName = data["coffeeName"] as? String ?? ""
-//                    let directions = data["directions"] as? String ?? ""
+                    let coffeeName = data["coffeeName"] as? String ?? ""
+                    let directions = data["directions"] as? String ?? ""
                     
-                    return Recipe(DocumentID: uid, id: uid, data: data)
+                    return Recipe(id: uid, coffeeName: coffeeName, directions: directions)
             }
     }
     }

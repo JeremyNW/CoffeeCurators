@@ -52,7 +52,7 @@ struct HomeScreen: View {
                 }.background(Color("Background_color"))
             }
         }
-    }
+    
 
 
 struct HomeScreen_Previews: PreviewProvider {
