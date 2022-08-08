@@ -26,12 +26,11 @@ struct Recipe: Identifiable, Hashable, Decodable {
 //    var userName: String
 //    var userImage: String
     
-    init(DocumentID: String, id: String, data: [String: Any]) {
-        self.documentID = DocumentID
-        self.id = data["uid"] as?  String ?? ""
-        self.coffeeName = data["coffeeName"] as? String ?? ""
-        self.directions = data["directions"] as? String ?? ""
-    }
+//    init(id: String, data: [String: Any]) {
+//        self.id = data["uid"] as?  String ?? ""
+//        self.coffeeName = data["coffeeName"] as? String ?? ""
+//        self.directions = data["directions"] as? String ?? ""
+//    }
 }
 
 
