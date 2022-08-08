@@ -13,8 +13,8 @@ struct FavoriteRecipes: View {
             ZStack {
                 VStack {
                     Text("Favorite Recipes")
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(Font.custom("Cormorant-SemiBold", size: 26))
+//                        .fontWeight(.bold)
                         .foregroundColor(.white)
                     List {
                         ForEach(0..<6) { recipe in
