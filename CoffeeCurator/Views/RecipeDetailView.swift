@@ -15,6 +15,7 @@ struct RecipeDetailView: View {
     @State private var recipeName = ""
     @State private var directions = ""
     
+ 
     
     var body: some View {
         VStack {
@@ -63,6 +64,17 @@ struct RecipeDetailView: View {
             }
     }
 }
+    
+//    func prepareForUpdateRecipe() {
+//        let name = recipeName
+//        let directions = directions
+//
+//        guard !name.isEmpty, !directions.isEmpty else { return }
+//
+//        viewModel.updateRecipe()
+//        
+//    }
+    
 }
 
 struct RecipeDetailView_Previews: PreviewProvider {
