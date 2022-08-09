@@ -20,8 +20,9 @@ struct ProfileTab: View {
          
                VStack {
                    Text("Profile")
-                       .font(.title3)
+                       .font(Font.custom("Cormorant-SemiBold", size: 30))
                        .foregroundColor(.white)
+                     
                    HStack {
                        KFImage(URL(string: viewModel.currentUser?.profilePictureUrl ?? self.profilePictureUrl))
                            .resizable()
@@ -69,19 +70,16 @@ struct ProfileTab: View {
                    }.listStyle(.plain)
                    
                    Button(action: {
-                       
                        viewModel.signout()
                    }) {
-                       
-                       ZStack {
-                           RoundedRectangle(cornerRadius: 15)
-                               .frame(width: 280, height: 35)
+                     
                            Text("Sign Out")
-                        
+                           .padding()
                                .background(Color("champagne_button"))
+                               .cornerRadius(30)
                                .font((.system(size: 15, weight: .semibold, design: .default))
                                )
-                       }
+                       
                    }
                    .padding(30)
                }.onAppear() {

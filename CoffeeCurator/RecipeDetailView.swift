@@ -9,13 +9,16 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     
+    let recipe: Recipe
+    
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
     @State private var recipeName = ""
-    @State private var directions = "Directions: "
+    @State private var directions = ""
+    
     
     var body: some View {
         VStack {
-            Text("Coffee Recipe")
+            Text("\(recipe.coffeeName) Recipe")
                 .font(.system(size: 35))
             ZStack {
                 Image(systemName: "cup.and.saucer.fill")
@@ -23,7 +26,7 @@ struct RecipeDetailView: View {
                     .aspectRatio(contentMode: .fit)
                     .foregroundColor(.secondary)
                 
-                .frame(width: 300)
+                    .frame(width: 300, height: 100)
                 .padding(30)
                 Button{
                     print("Button pressed")
@@ -34,19 +37,17 @@ struct RecipeDetailView: View {
                 }
                 .offset(x: 150, y: -90)
             }
-            TextField("Recipe Name...", text: $recipeName)
+            VStack{
+
+            TextField(recipe.coffeeName, text: $recipeName)
                 .textFieldStyle(.roundedBorder)
                 .frame(width: 300)
                 .padding()
-            
-            TextEditor(text: $directions)
-                .frame(width: 300, height: 200, alignment: .topLeading)
-                .padding()
-                .font(.system(size: 15))
-                .overlay( RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.secondary, lineWidth: 0.2)
-                    .frame(width: 300))
-           
+                ZStack{
+                TextEditor(text: $directions)
+                    Text(recipe.directions).opacity(1).padding(.all, 8)
+                }
+            }
             Button{
                 print("Button pressed")
             } label: {
@@ -66,6 +67,6 @@ struct RecipeDetailView: View {
 
 struct RecipeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeDetailView()
+        RecipeDetailView(recipe: .init(coffeeName: "coffee", directions: "directions"))
     }
 }
