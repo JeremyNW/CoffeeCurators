@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeScreen: View {
+struct HomeView: View {
     
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
     
@@ -37,10 +37,13 @@ struct HomeScreen: View {
                             })
                         }
                     }
-                    List(viewModel.recipes, id: \.self) { recipe in
+                    List{
+                        
+                   ForEach(viewModel.recipes, id: \.self) { recipe in
                        
                         RecipeListCell(recipe: recipe)
                                     
+                    } .onDelete(perform: viewModel.delete)
                     }
                     .listRowBackground(Color("Background_color"))
                     .listStyle(.plain)
@@ -58,6 +61,6 @@ struct HomeScreen: View {
 
 struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {
-        HomeScreen()
+        HomeView()
     }
 }
