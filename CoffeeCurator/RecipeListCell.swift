@@ -17,29 +17,32 @@ struct RecipeListCell: View {
         HStack{
                 Image(systemName: "photo")
                     .resizable()
-                    .frame(width: 100, height: 100, alignment: .leading)
+                    .aspectRatio(contentMode: .fit)
                     .foregroundColor(.white)
                     .padding()
-           
-            VStack(alignment: .leading) {
+                    .frame(width: 100, height: 100)
+            VStack{
                     Text(recipe.coffeeName)
+                    .font(Font.custom("Cormorant-Light", size: 28))
                         .font(.title3)
-                    .foregroundColor(.white)
+                   .foregroundColor(.white)
                     .padding(.bottom, 5)
                   
-                } .frame(width: 100, height: 100)
+                } .frame(width: 150, height: 100)
             Button(action: {
                 self.isFavorited.toggle()
             }, label: {
                 Image(systemName: self.isFavorited == false ? "heart" : "heart.fill")
+                    .frame(width: 50, height: 50)
                     .foregroundColor(.white)
-                    .padding()
+
             })
-            .frame(width: 70, height: 80)
             .buttonStyle(BorderedButtonStyle())
+            .frame(width: 50, height: 50)
         }
+        .listRowBackground(Color("Background_color"))
         .overlay(
-            NavigationLink(destination: RecipeDetailView(), isActive: $showDetails) {
+            NavigationLink(destination: RecipeDetailView(recipe: .init(coffeeName: recipe.coffeeName, directions: recipe.directions)), isActive: $showDetails) {
                 EmptyView()
             }
         )

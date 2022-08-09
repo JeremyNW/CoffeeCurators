@@ -19,10 +19,11 @@ struct HomeScreen: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
+           
                 VStack {
                     HStack {
-                        Text("COFFEE RECIPES")
+                        Text("Coffee Recipes")
+                            .font(Font.custom("Cormorant-SemiBold", size: 30))
                             .padding()
                             .font(.title)
                             .foregroundColor(.white)
@@ -36,61 +37,23 @@ struct HomeScreen: View {
                             })
                         }
                     }
-                    List {
-                        ForEach(viewModel.recipes, id: \.self) { recipe in
-                            NavigationLink{
-                                
-                            }
-                        label: {
-                            HStack{
-                                HStack {
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                        .frame(width: 100, height: 100, alignment: .leading)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                }
-                                HStack{
-                                    VStack {
-                                        Text(recipe.coffeeName)
-                                            .font(.title3)
-                                            .padding(.bottom, 5)
-                                            .foregroundColor(.white)
-                                        //                                Text("Milk, espresso, etc...")
-                                        //                                    .padding(.bottom, 3)
-                                        //                                    .foregroundColor(.white)
-                                        Text(recipe.directions)
-                                            .foregroundColor(.white)
-                                    }
-                                }
-                            }
-                        }.listRowBackground(Color("Background_color"))
-                        }
-                        .onDelete(perform: viewModel.delete)
-          
+                    List(viewModel.recipes, id: \.self) { recipe in
+                       
+                        RecipeListCell(recipe: recipe)
+                                    
                     }
+                    .listRowBackground(Color("Background_color"))
                     .listStyle(.plain)
-                    .onAppear() {
-                        self.viewModel.fetchRecipes()
-                    }
-                    
                 }
-            }.background(Color("Background_color"))
-                
+            
+   .background(Color("Background_color"))
+   .onAppear() {
+       self.viewModel.fetchRecipes()
+      
+   }
         }
     }
-    
-    
 }
-//                        .onDelete { indexSet in
-//                            self.viewModel.delete(recipe: viewModel.recipes.id, completion: <#T##((Bool) -> Void)?#>)
-
-
-
-
-
-
-
 
 
 struct HomeScreen_Previews: PreviewProvider {

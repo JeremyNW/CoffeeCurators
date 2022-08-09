@@ -36,6 +36,7 @@ struct ContentView: View {
 
         var body: some View {
             TabView(selection: $selection) {
+           
                 HomeScreen()
                     .font(.title)
                     .tabItem {
@@ -63,8 +64,11 @@ struct ContentView: View {
                         }
                     }
                     .tag(2)
-            }.accentColor(.primary)
-
+                
+            }.accentColor(.gray)
+                .onAppear{
+            UITabBar.appearance().barTintColor = .white
+                }
         }
 }
 

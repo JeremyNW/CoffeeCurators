@@ -13,48 +13,26 @@ struct FavoriteRecipes: View {
     
     var body: some View {
         NavigationView{
-            ZStack {
+            
                 VStack {
                     Text("Favorite Recipes")
-                        .font(Font.custom("Cormorant-SemiBold", size: 26))
-//                        .fontWeight(.bold)
+                        .font(Font.custom("Cormorant-SemiBold", size: 30))
+
                         .foregroundColor(.white)
-                    List {
-                        ForEach(viewModel.recipes, id: \.self) { recipe in
-                            NavigationLink{
-
-                            }
-                            label: {
-                    HStack{
-
-                            Image(systemName: "photo")
-                                .resizable()
-                                .frame(width: 100, height: 100, alignment: .leading)
-                                .foregroundColor(.white)
-                                .padding()
-                       
-                            VStack {
-                                Text(recipe.coffeeName)
-                                    .font(.title3)
-                                .foregroundColor(.white)
-                                .padding(.bottom, 5)
-                              
-                            }
-                            Image(systemName: "heart")
-                                .foregroundColor(.white)
-                                .padding()
+                    List(viewModel.recipes, id: \.self) { recipe in
+          
+                        RecipeListCell(recipe: recipe)
                         
-                    }
-                }
             }
                 .listRowBackground(Color("Background_color"))
                  
                     }.listStyle(.plain)
-                }
-            }.background(Color("Background_color"))
-         }
+                .background(Color("Background_color"))
+            }
+       
+         } 
     }
-}
+
 struct FavoriteRecipes_Previews: PreviewProvider {
     static var previews: some View {
         FavoriteRecipes()
