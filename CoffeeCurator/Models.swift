@@ -21,7 +21,7 @@ struct Recipe: Identifiable, Hashable, Decodable {
     var coffeeName: String
 //    var ingredients: String
     var directions: String
-//    var isFavorite: Bool = false
+    var isFavorite: Bool? = false
 //    var imageURL: String
 //    var userName: String
 //    var userImage: String

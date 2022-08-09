@@ -39,37 +39,21 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     //MARK: FUNCTIONS FOR RECIPES
     
         func addRecipe(coffeeName: String, directions: String) {
-    
-            let db = Firestore.firestore()
-    
-            db.collection("recipe").addDocument(data: [
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+            
+
+            let data: [String: Any] = [
+                
+
                 "coffeeName": coffeeName,
                 "directions": directions,
-                
-            ])
+                "isFavorite": false
+            ]
+            
+            db.collection("recipe").document(uid).setData(data)
         }
     
-//    func addRecipe(coffeeName: String, directions: String) {
-//        db.collection("recipe").addDocument(data: [
-//            "coffeeName": coffeeName,
-//            "directions": directions,
-//        ])
-//    }
-    
-//        func updateData(recipeToUpdate: recipe) {
-//            let db = Firestore.firestore()
-//
-//            db.collection("recipe").document(recipe.id).setData([recipeToUpdate.userName: userToUpdate], merge:true) { error in
-//
-//
-//                if error == nil {
-//                    self.getData()
-//                }
-//            }
-//        }
-    
-  
-    
+
     func fetchRecipes() {
         db.collection("recipe").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
@@ -82,9 +66,45 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
                 let id = queryDocumentSnapshot.documentID
                 let coffeeName = data["coffeeName"] as? String ?? ""
                 let directions = data["directions"] as? String ?? ""
-                return Recipe(id: id, coffeeName: coffeeName, directions: directions)
+                let isFavorite = data["isFavorite"] as? Bool ?? false
+                return Recipe(id: id, coffeeName: coffeeName, directions: directions, isFavorite: isFavorite)
             }
         }
+    }
+    
+    
+    func unlikeRecipe() {
+        
+    }
+    
+    func likeRecipe() {
+        
+    }
+    
+    func updateRecipe(_ offsets: IndexSet, coffeeName: String, directions: String) {
+
+        let data: [String: Any] = [
+        
+            "coffeeName": coffeeName,
+            "directions": directions,
+    
+        ]
+        offsets.map { recipes[$0] }.forEach { recipe in
+            guard let recipeID = recipe.id else { return }
+            
+            let docUpdate = db.collection("users")
+                .document(recipeID)
+           
+            docUpdate.updateData(data)
+       
+//        { error in
+//                if let error = error {
+//                    print("Error updating document: \(error)")
+//                } else {
+//                    print("Document successfully updated!")
+//                }
+//        }
+    }
     }
     
     //*************************************

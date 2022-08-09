@@ -59,9 +59,19 @@ struct HomeScreen: View {
                                         //                                Text("Milk, espresso, etc...")
                                         //                                    .padding(.bottom, 3)
                                         //                                    .foregroundColor(.white)
-                                        Text(recipe.directions)
-                                            .foregroundColor(.white)
+//                                        Text(recipe.directions)
+//                                            .foregroundColor(.white)
+                                    
                                     }
+//                                    Button {
+////                                        viewModel.recipe.isFavorite ?? false ?
+////                                        viewModel.unlikeRecipe() :
+////                                        viewModel.likeRecipe()
+//                                    } label: {
+//                                        Image(systemName: viewModel.recipe.isFavorite ?? false ? "heart.fill" : "heart")
+//                                            .font(.subheadline)
+//                                            .foregroundColor(viewModel.recipe.isFavorite ?? false ? .red : .gray)
+//                                    }
                                 }
                             }
                         }.listRowBackground(Color("Background_color"))
