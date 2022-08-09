@@ -26,8 +26,7 @@ struct SignUpView: View {
     @State private var isShowingPhotoPicker = false
 
     var body: some View {
-        
-        NavigationView {
+
         VStack {
             NavigationLink(destination: ProfilePhotoSelectorView(),
                            isActive: $viewModel.didRegister,
@@ -62,49 +61,49 @@ struct SignUpView: View {
                         .padding()
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(20)
-                    
-                    
+
                     }
-
                     Button(action: {
-
                         guard !email.isEmpty, !password.isEmpty else {
                             return
                         }
-                        
+                
                         viewModel.signUp(email: email, password: password, userName: userName)
-                       
 
                     }, label: {
                         Text("Create Account")
-                        
-                            .fontWeight(.bold)
-                            .frame(width: 350, height: 40)
-                          
-                    }).cornerRadius(40)
+                            .font(.headline)
+                            .foregroundColor(.black)
+                            .frame(width: 340, height: 50)
+                            .background(Color("champagne_button"))
+                            .clipShape(Capsule())
+                            .padding()
+                    })
+                    .padding(.top, 24)
+                    .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: 0)
+                
                 NavigationLink(destination: SignInView(), label: {
                     Text("Have an account already?")
                         .foregroundColor(Color("NoAccountYet"))
                 })
-                        .padding()
-                        .foregroundColor(.white)
-            }.padding()
-                .background(Color("Background_color"))
-            Spacer()
+            }
+                
+         
             .sheet(isPresented: $isShowingPhotoPicker, content: {
                     ProfilePhotoSelectorView()
                 })
                 .padding(10)
         
                 Spacer()
-            }
+            }.navigationBarBackButtonHidden(true)
+            .background(Color("Background_color"))
             
             
         .onAppear(perform: {
                 viewModel.didRegister = false
             })
    
-    }
+    
 
     }
 

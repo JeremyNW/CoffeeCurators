@@ -35,6 +35,9 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
        
     }
 
+    
+    //MARK: FUNCTIONS FOR RECIPES
+    
         func addRecipe(coffeeName: String, directions: String) {
     
             let db = Firestore.firestore()
@@ -46,12 +49,26 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
             ])
         }
     
-    func addRecipe(coffeeName: String, directions: String) {
-        db.collection("recipe").addDocument(data: [
-            "coffeeName": coffeeName,
-            "directions": directions,
-        ])
-    }
+//    func addRecipe(coffeeName: String, directions: String) {
+//        db.collection("recipe").addDocument(data: [
+//            "coffeeName": coffeeName,
+//            "directions": directions,
+//        ])
+//    }
+    
+//        func updateData(recipeToUpdate: recipe) {
+//            let db = Firestore.firestore()
+//
+//            db.collection("recipe").document(recipe.id).setData([recipeToUpdate.userName: userToUpdate], merge:true) { error in
+//
+//
+//                if error == nil {
+//                    self.getData()
+//                }
+//            }
+//        }
+    
+  
     
     func fetchRecipes() {
         db.collection("recipe").addSnapshotListener { (querySnapshot, error) in
@@ -69,6 +86,10 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
             }
         }
     }
+    
+    //*************************************
+    
+    //MARK: FUNCTIONS FOR USERS
     
     func signUp(email: String, password: String, userName: String) {
         
@@ -113,6 +134,29 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
             
         }
     }
+    
+    func fetchUserData() {
+        let db = Firestore.firestore()
+        db.collection("users").addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+
+            self.users = documents.map { (queryDocumentSnapshot) -> User in
+                
+                let data = queryDocumentSnapshot.data()
+                let id = data["uid"] as? String ?? ""
+                let userName = data["userName"] as? String ?? ""
+                let profilePictureUrl = data["profilePictureUrl"] as? String ?? ""
+                return User(id: id, userName: userName, profilePictureUrl: profilePictureUrl)
+            }
+        }
+    }
+    
+    
+    //*************************************
+    
     
     func uploadProfilePhoto(_ profilePicture: UIImage) {
         

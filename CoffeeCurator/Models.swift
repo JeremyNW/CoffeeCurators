@@ -36,10 +36,9 @@ struct Recipe: Identifiable, Hashable, Decodable {
 
 struct User:  Identifiable, Hashable, Decodable  {
    
-    var id: String
-   // @DocumentID var id: String?
+//    var id: String
+    @DocumentID var id: String?
     var userName: String
-    var userImage: String
     var profilePictureUrl: String
     
     var isCurrentUser: Bool { return Auth.auth().currentUser?.uid == id }

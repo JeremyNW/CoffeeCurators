@@ -6,25 +6,33 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ProfileTab: View {
     
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
     
+    @State private var profilePictureUrl = ""
+    @State private var userName = ""
+    
     var body: some View {
         NavigationView{
-           ZStack {
+         
                VStack {
                    Text("Profile")
                        .font(.title3)
                        .foregroundColor(.white)
                    HStack {
-                       Image(systemName: "person.crop.circle")
+                       KFImage(URL(string: viewModel.currentUser?.profilePictureUrl ?? self.profilePictureUrl))
                            .resizable()
-                           .frame(width: 50, height: 50, alignment: .leading)
-                           .foregroundColor(.white)
-                           .padding()
-                       Text("Name")
+                           .scaledToFill()
+                           .frame(width: 100, height: 100, alignment: .leading)
+
+                       .clipShape(Circle())
+                       .cornerRadius(20)
+                       
+                       Text("\(viewModel.currentUser?.userName ?? self.userName)")
+                       
                            .font(.title)
                            .foregroundColor(.white)
                    }
@@ -68,16 +76,19 @@ struct ProfileTab: View {
                        ZStack {
                            RoundedRectangle(cornerRadius: 15)
                                .frame(width: 280, height: 35)
-                            
-                           
                            Text("Sign Out")
+                        
+                               .background(Color("champagne_button"))
                                .font((.system(size: 15, weight: .semibold, design: .default))
                                )
                        }
                    }
                    .padding(30)
-               }.background(Color("Background_color"))
-           }
+               }.onAppear() {
+                   self.viewModel.fetchUserData()
+               }
+               .background(Color("Background_color"))
+           
         }
     }
 }

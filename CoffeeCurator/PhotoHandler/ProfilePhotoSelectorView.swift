@@ -18,9 +18,7 @@ struct ProfilePhotoSelectorView: View {
     
     
     var body: some View {
-        NavigationView {
             VStack{
-                
                 Text("Let's upload your profile picture!")
                     .font(.largeTitle)
                     .bold()
@@ -34,6 +32,9 @@ struct ProfilePhotoSelectorView: View {
                                 .resizable()
                                 .modifier(ProfilePhotoModifier())
                         } else {
+                            Text("Click Plus to Upload Your Picture")
+                                .font(.largeTitle)
+                                .bold()
                             Image(systemName: "plus")
                                 .foregroundColor(Color("Background_color"))
 //                                .renderingMode(.template)
@@ -44,8 +45,7 @@ struct ProfilePhotoSelectorView: View {
                 .sheet(isPresented: $isShowingPhotoPicker, onDismiss: loadPhoto, content: { PhotoPicker(selectedPicture: $selectedPicture)
                     
                 })
-                .padding(30)
-                
+
                 Text(profilePicture == nil ? "Select a profile photo" : "Great! Tap below to continue")
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.white)
@@ -57,7 +57,7 @@ struct ProfilePhotoSelectorView: View {
                                 .font(.headline)
                                 .foregroundColor(.black)
                                 .frame(width: 340, height: 50)
-                                .background(Color("Background_color"))
+                                .background(Color("champagne_button"))
                                 .clipShape(Capsule())
                                 .padding()
                         }) .padding(.top, 24)
@@ -67,7 +67,7 @@ struct ProfilePhotoSelectorView: View {
             }
                
             
-        }
+        
         
     }
 }
