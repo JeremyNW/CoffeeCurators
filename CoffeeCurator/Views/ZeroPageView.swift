@@ -33,17 +33,17 @@ struct ZeroPageView: View {
                     HStack {
                         NavigationLink(destination: SignInView(), label: {
                             Text("Sign In")
-                                .bold()
+                                .font(Font.custom("Cormorant-Bold", size: 20))
                                 .frame(maxWidth: 400, maxHeight: 40)
                                 .background(Color("champagne_button"))
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("Background_color"))
                                 .cornerRadius(10)
                         })
                         .padding()
                         
                         NavigationLink(destination: SignUpView(), label: {
                             Text("Sign Up")
-                                .bold()
+                                .font(Font.custom("Cormorant-Bold", size: 20))
                                 .frame(maxWidth: 400, maxHeight: 40)
                                 .background(Color("SignUpButton"))
                                 .foregroundColor(.white)

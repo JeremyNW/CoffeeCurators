@@ -24,15 +24,13 @@ struct SignInView: View {
             VStack {
                 Spacer()
                 Text("Let's sign you in!")
-                    .font(.largeTitle)
-                    .bold()
+                    .font(Font.custom("Cormorant-Bold", size: 30))
                     .padding()
                     .foregroundColor(Color("champagne_button"))
-                
-                
                 VStack {
                     TextField("Email Address", text: $email)
                         .disableAutocorrection(true)
+                        .font(Font.custom("Cormorant-Light", size: 18))
                         .autocapitalization(.none)
                         .padding()
                         .background(Color(.secondarySystemBackground))
@@ -40,6 +38,7 @@ struct SignInView: View {
                     
                     SecureField("Password", text: $password)
                         .disableAutocorrection(true)
+                        .font(Font.custom("Cormorant-Light", size: 18))
                         .autocapitalization(.none)
                         .padding()
                         .background(Color(.secondarySystemBackground))
@@ -55,13 +54,14 @@ struct SignInView: View {
                     }, label: {
                         Text("Sign In")
                             .foregroundColor(Color("champagne_button"))
-                            .fontWeight(.bold)
+                            .font(Font.custom("Cormorant-Regular", size: 18))
                             .frame(width: 350, height: 40)
                             .background(Color("sendAnInvite_button_light_brown"))
                         
                     })  .cornerRadius(40)
                     NavigationLink(destination: SignUpView(), label: {
                         Text("Don't have an account yet?")
+                            .font(Font.custom("Cormorant-Medium", size: 20))
                             .foregroundColor(Color("NoAccountYet"))
                     })
                     .padding()
