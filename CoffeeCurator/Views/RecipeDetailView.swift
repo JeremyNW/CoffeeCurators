@@ -12,16 +12,18 @@ struct RecipeDetailView: View {
     let recipe: Recipe
     
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
-    @State private var recipeName = ""
+    @State private var coffeeName = ""
     @State private var directions = ""
     @State private var userID = ""
     
- 
     
     var body: some View {
+        ZStack{
+            Color("Background_color")
         VStack {
             Text("\(recipe.coffeeName) Recipe")
-                .font(.system(size: 35))
+                .font(Font.custom("Cormorant-SemiBold", size: 30))
+                .foregroundColor(.white)
             ZStack {
                 Image(systemName: "cup.and.saucer.fill")
                     .resizable()
@@ -41,7 +43,7 @@ struct RecipeDetailView: View {
             }
             VStack{
 
-            TextField(recipe.coffeeName, text: $recipeName)
+            TextField(recipe.coffeeName, text: $coffeeName)
                 .textFieldStyle(.roundedBorder)
                 .frame(width: 300)
                 .padding()
@@ -56,22 +58,25 @@ struct RecipeDetailView: View {
                 
             }
             Button{
-                viewModel.addRecipe(coffeeName: recipe.coffeeName, directions: recipe.directions)
+                viewModel.addRecipe(coffeeName: coffeeName, directions: directions)
             } label: {
                 Text("Save")
                     .padding(15)
-                    .background(Color.white)
-                    .cornerRadius(20)
-                    .frame(width: 200)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.black, lineWidth: 1)
-                    )
+                    .background(Color("champagne_button"))
+                    .cornerRadius(30)
+                    .font(Font.custom("Cormorant-SemiBold", size: 16))
+                    .foregroundColor(Color("Background_color"))
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 20)
+//                            .stroke(Color.black, lineWidth: 1)
+//                    )
             }
         } .onAppear {
-            recipeName = recipe.coffeeName
+            coffeeName = recipe.coffeeName
             directions = recipe.directions
         }
+        }
+        .background(Color("Background_color"))
 }
     
 }
