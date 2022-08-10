@@ -75,7 +75,7 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
 //        }
 //    }
     func addRecipe(coffeeName: String, directions: String) {
-                guard let uid = Auth.auth().currentUser?.uid else { return }
+                guard let userID = Auth.auth().currentUser?.uid else { return }
 
 
                 let data: [String: Any] = [
@@ -84,7 +84,7 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
                     "coffeeName": coffeeName,
                     "directions": directions,
                     "isFavorite": false,
-                    "uid": uid
+                    "userID": userID
                 ]
 
                 db.collection("recipe").document().setData(data)
