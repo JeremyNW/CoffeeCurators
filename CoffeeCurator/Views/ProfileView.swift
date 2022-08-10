@@ -38,36 +38,19 @@ struct ProfileView: View {
                            .foregroundColor(.white)
                    }.padding()
                    List {
-                       ForEach(0..<10) { recipe in
-                           NavigationLink{
-
+                       ForEach(viewModel.recipes, id: \.self) { recipe in
+                           if  recipe.userID == viewModel.currentUser?.id {
+                           RecipeListCell(recipe: recipe)
                            }
-                           label: {
-                   HStack{
-                       HStack {
-                           Image(systemName: "photo")
-                               .resizable()
-                               .frame(width: 100, height: 100, alignment: .leading)
-                               .foregroundColor(.white)
-                               .padding()
                        }
-                       HStack{
-                           VStack {
-                               Text("Beverage Name")
-                                   .font(.title3)
-                                   .padding(.bottom, 5)
-                                   .foregroundColor(.white)
-                            
-                        }
-                    }
-                }
-            }
-//        }
+                           
+        }
                 .listRowBackground(Color("Background_color"))
-                      
-                       }.foregroundColor(.white)
+                .listStyle(.plain)
+                       }
                        
-                   }.listStyle(.plain)
+              
+            
                    
 //                   Button(action: {
 //                       viewModel.signout()
@@ -118,7 +101,7 @@ struct ProfileView: View {
             }
         }
     }
-}
+
 
 struct ProfileTab_Previews: PreviewProvider {
     static var previews: some View {

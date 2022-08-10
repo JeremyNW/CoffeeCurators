@@ -15,6 +15,8 @@ struct RecipeListCell: View {
     
     var body: some View {
         HStack{
+            
+           
                 Image(systemName: "photo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -39,6 +41,7 @@ struct RecipeListCell: View {
             })
             .buttonStyle(BorderedButtonStyle())
             .frame(width: 50, height: 50)
+        
         }
         .listRowBackground(Color("Background_color"))
         .overlay(
