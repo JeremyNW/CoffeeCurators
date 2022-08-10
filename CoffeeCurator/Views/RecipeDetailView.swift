@@ -44,13 +44,18 @@ struct RecipeDetailView: View {
                 .textFieldStyle(.roundedBorder)
                 .frame(width: 300)
                 .padding()
-                ZStack{
+                
                 TextEditor(text: $directions)
-                    Text(recipe.directions).opacity(1).padding(.all, 8)
-                }
+                    .frame(width: 300, height: 200, alignment: .topLeading)
+                    .padding()
+                    .font(.system(size: 15))
+                    .overlay( RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.secondary, lineWidth: 0.2)
+                        .frame(width: 300))
+                
             }
             Button{
-                print("Button pressed")
+                viewModel.addRecipe(coffeeName: recipe.coffeeName, directions: recipe.directions)
             } label: {
                 Text("Save")
                     .padding(15)
@@ -62,18 +67,11 @@ struct RecipeDetailView: View {
                             .stroke(Color.black, lineWidth: 1)
                     )
             }
-    }
+        } .onAppear {
+            recipeName = recipe.coffeeName
+            directions = recipe.directions
+        }
 }
-    
-//    func prepareForUpdateRecipe() {
-//        let name = recipeName
-//        let directions = directions
-//
-//        guard !name.isEmpty, !directions.isEmpty else { return }
-//
-//        viewModel.updateRecipe()
-//        
-//    }
     
 }
 
