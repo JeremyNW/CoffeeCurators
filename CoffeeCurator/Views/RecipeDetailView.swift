@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     
-    let recipe: Recipe
+    var recipe: Recipe
     
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
     @State private var coffeeName = ""

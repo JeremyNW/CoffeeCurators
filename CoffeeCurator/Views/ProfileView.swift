@@ -17,6 +17,7 @@ struct ProfileView: View {
     
     var body: some View {
         NavigationView{
+            VStack{
                VStack {
                    Text("Profile")
                        .font(Font.custom("Cormorant-SemiBold", size: 30))
@@ -35,7 +36,7 @@ struct ProfileView: View {
                        
                            .font(.title)
                            .foregroundColor(.white)
-                   }
+                   }.padding()
                    List {
                        ForEach(0..<10) { recipe in
                            NavigationLink{
@@ -68,24 +69,53 @@ struct ProfileView: View {
                        
                    }.listStyle(.plain)
                    
-                   Button(action: {
-                       viewModel.signout()
-                   }) {
-                     
-                           Text("Sign Out")
-                           .padding()
-                               .background(Color("champagne_button"))
-                               .cornerRadius(30)
-                               .font(Font.custom("Cormorant-SemiBold", size: 16))
-                               .foregroundColor(Color("Background_color"))
-                       
-                   }
+//                   Button(action: {
+//                       viewModel.signout()
+//                   }) {
+//
+//                           Text("Sign Out")
+//                           .padding()
+//                               .background(Color("champagne_button"))
+//                               .cornerRadius(30)
+//                               .font(Font.custom("Cormorant-SemiBold", size: 16))
+//                               .foregroundColor(Color("Background_color"))
+//
+//                   }
                    .padding(30)
                }.onAppear() {
                    self.viewModel.fetchUserData()
                }
                .background(Color("Background_color"))
-           
+               .navigationBarTitleDisplayMode(.inline)
+               .toolbar {
+                   ToolbarItem(placement:.navigationBarLeading) {
+                       Button(action: {
+                           viewModel.signout()
+                       }, label: {
+                           Text ("Sign Out")
+                               .foregroundColor(.white)
+                               .frame(width: 350, height: 40)
+                               .font(Font.custom("Cormorant-SemiBold", size: 18))
+                       })
+                       .padding(.trailing, 280)
+                       .navigationBarTitleDisplayMode(.inline)
+                       .toolbar {
+                           ToolbarItem(placement: .navigationBarTrailing) {
+                               NavigationLink (
+                                destination:
+                                    NewRecipeView()
+                               ,label: {
+                                   Image(systemName: "plus")
+                                       .foregroundColor(.white)
+                                       .frame(width: 350, height: 40)
+                                       .font(Font.custom("Cormorant-SemiBold", size: 18))
+                               })
+                               .padding(.trailing, 50)
+                           }
+                       }
+                   }
+               }
+            }
         }
     }
 }

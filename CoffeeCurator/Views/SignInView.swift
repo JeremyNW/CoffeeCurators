@@ -22,6 +22,7 @@ struct SignInView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Spacer()
                 Text("Let's sign you in!")
                     .font(.largeTitle)
                     .bold()
@@ -69,7 +70,7 @@ struct SignInView: View {
                 
                 Spacer()
             } .background(Color("Background_color"))
-        }
+        }.navigationBarHidden(true)
 
     }
 }
