@@ -19,7 +19,6 @@ struct HomeScreen: View {
     
     var body: some View {
         NavigationView {
-           
                 VStack {
                     HStack {
                         Text("Coffee Recipes")
