@@ -16,8 +16,10 @@ import FirebaseFirestoreSwift
 class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     
     @Published var recipes = [Recipe]()
+
     @Published var users = [User]()
     @Published var didRegister = false
+    @Published var isFavorite = false
     @Published var didAuthenticateUser = false
     @Published var currentUser: User?
     @Published var userSession: FirebaseAuth.User?
@@ -29,6 +31,7 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     override init() {
         super.init()
     
+   
         tempCurrentUser = nil
         userSession = Auth.auth().currentUser
         fetchUser()
@@ -106,14 +109,61 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
                 }
             }
         }
+    //MARK: LIKE?DISLIKE FUNCTIONS
     
-    func unlikeRecipe() {
+    
+    func likeRecipe(_ recipe: Recipe, completion: @escaping() -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let recipeId = recipe.id else { return }
         
+        let userLikesRef = Firestore.firestore().collection("users").document(uid).collection("user-likes")
+        
+        Firestore.firestore().collection("recipe").document(recipeId)
+            .updateData(["isFavorite": recipe.isFavorite ?? true]) { _ in
+                userLikesRef.document(recipeId).setData([:]) { _ in
+                    completion()
+                }
+            }
     }
     
-    func likeRecipe() {
+    func unlikeRecipe(_ recipe: Recipe, completion: @escaping() -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let recipeId = recipe.id else { return }
+   
         
+        let userLikesRef = Firestore.firestore().collection("users").document(uid).collection("user-likes")
+        
+        Firestore.firestore().collection("recipe").document(recipeId)
+            .updateData(["isFavorite": recipe.isFavorite ?? false]) { _ in
+                userLikesRef.document(recipeId).delete { _ in
+                    completion()
+                }
+            }
     }
+    
+//    func likeRecipe(reccipe: Recipe) {
+//
+////        let recipes: Recipe
+////        var isFavorite: Bool? = false
+//
+//        likeRecipe(recipe) {
+//            self.recipe.isFavorite = true
+//        }
+//
+//    }
+//
+//
+//    func unlikeRecipe() {
+//
+//        unlikeRecipe(recipe) {
+//            self.recipe.isFavorite = false
+//        }
+//
+//    }
+//
+   
+    
+    
     
     func updateRecipe(_ offsets: IndexSet, coffeeName: String, directions: String) {
 

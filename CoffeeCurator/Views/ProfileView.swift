@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct ProfileTab: View {
+struct ProfileView: View {
     
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
     
@@ -92,6 +92,6 @@ struct ProfileTab: View {
 
 struct ProfileTab_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileTab()
+        ProfileView()
     }
 }
