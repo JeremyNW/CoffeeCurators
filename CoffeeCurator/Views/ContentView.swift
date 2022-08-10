@@ -37,7 +37,7 @@ struct ContentView: View {
         var body: some View {
             TabView(selection: $selection) {
            
-                HomeScreen()
+                HomeView()
                     .font(.title)
                     .tabItem {
                         VStack {
@@ -55,7 +55,7 @@ struct ContentView: View {
                         }
                     }
                     .tag(1)
-                ProfileTab()
+                ProfileView()
                     .font(.title)
                     .tabItem {
                         VStack {
