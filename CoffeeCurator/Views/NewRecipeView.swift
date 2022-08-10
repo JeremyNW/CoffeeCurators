@@ -11,7 +11,10 @@ struct NewRecipeView: View {
     
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
     @Environment(\.dismiss) private var dismiss
-    
+    @State private var selectedPicture: UIImage?
+    @State private var coffeeImage: Image?
+    @State private var picture: Image?
+    @State private var isShowingPhotoPicker = false
     @State private var coffeeName = ""
     @State private var directions = ""
     
@@ -30,15 +33,22 @@ struct NewRecipeView: View {
                 
                 .frame(width: 300)
                 .padding(30)
-                Button{
-                    print("Button pressed")
-                } label: {
+                Button(action: {
+                    isShowingPhotoPicker.toggle()
+                }, label: {
                     Image(systemName: "plus.app.fill")
                         .resizable()
                         .frame(width: 20, height: 20)
-                }
+                        .modifier(ProfilePhotoModifier())
+                
                 .offset(x: 80, y: -40)
+                
+                })
             }
+                .sheet(isPresented: $isShowingPhotoPicker, onDismiss: loadCoffeeImage, content: { PhotoPicker(selectedPicture: $selectedPicture)
+                    
+                })
+                
             TextField("Recipe Name...", text: $coffeeName)
                 .font(Font.custom("Cormorant-Regular", size: 16))
                 .textFieldStyle(.roundedBorder)
@@ -69,13 +79,32 @@ struct NewRecipeView: View {
 ////                            .stroke(Color.black, lineWidth: 10)
 //                    )
                     }
-                }
                 
-            }.background(Color("Background_color"))
                 
+            }
+       }
+            .background(Color("Background_color"))
+ 
         }
     }
+private struct ProfilePhotoModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(Color(.systemBlue))
+            .scaledToFill()
+            .frame(width: 190, height: 140)
+//            .clipShape(Circle())
+        
+    }
+}
 
+extension NewRecipeView {
+    func loadCoffeeImage() {
+        
+        guard let selectedPicture = selectedPicture else {return}
+        coffeeImage = Image(uiImage: selectedPicture)
+    }
+}
 struct NewRecipeView_Previews: PreviewProvider {
     static var previews: some View {
         NewRecipeView()
