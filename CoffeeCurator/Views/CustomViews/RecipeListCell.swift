@@ -15,17 +15,15 @@ struct RecipeListCell: View {
     
     var body: some View {
         HStack{
-            
-           
                 Image(systemName: "photo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .foregroundColor(.white)
                     .padding()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 120, height: 120)
             VStack{
                     Text(recipe.coffeeName)
-                    .font(Font.custom("Cormorant-Light", size: 28))
+                    .font(Font.custom("Cormorant-Regular", size: 24))
                         .font(.title3)
                    .foregroundColor(.white)
                     .padding(.bottom, 5)
@@ -35,8 +33,8 @@ struct RecipeListCell: View {
                 self.isFavorited.toggle()
             }, label: {
                 Image(systemName: self.isFavorited == false ? "heart" : "heart.fill")
-                    .frame(width: 50, height: 50)
                     .foregroundColor(.white)
+                    .padding()
 
             })
             .buttonStyle(BorderedButtonStyle())

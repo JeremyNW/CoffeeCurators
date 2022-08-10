@@ -23,7 +23,7 @@ struct NewRecipeView: View {
             Color("Background_color")
             VStack{
             Text("Create a new recipe!")
-                    .font(Font.custom("Cormorant-SemiBold", size: 30))
+                    .font(Font.custom("Cormorant-Bold", size: 30))
                     .foregroundColor(.white)
             ZStack {
                 Image(systemName: "photo")
@@ -50,14 +50,14 @@ struct NewRecipeView: View {
                 })
                 
             TextField("Recipe Name...", text: $coffeeName)
-                .font(Font.custom("Cormorant-Regular", size: 16))
+                .font(Font.custom("Cormorant-Regular", size: 20))
                 .textFieldStyle(.roundedBorder)
                 .frame(width: 300)
                 .padding()
             
             TextEditor(text: $directions)
                 .frame(width: 300, height: 200, alignment: .topLeading)
-                .font(Font.custom("Cormorant-Regular", size: 15))
+                .font(Font.custom("Cormorant-Light", size: 16))
                 .padding()
                 .font(.system(size: 15))
                 .overlay( RoundedRectangle(cornerRadius: 10)
