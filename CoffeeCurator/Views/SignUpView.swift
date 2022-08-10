@@ -86,7 +86,7 @@ struct SignUpView: View {
                     Text("Have an account already?")
                         .foregroundColor(Color("NoAccountYet"))
                 })
-            }
+            }.navigationBarBackButtonHidden(true)
                 
          
             .sheet(isPresented: $isShowingPhotoPicker, content: {
@@ -95,15 +95,13 @@ struct SignUpView: View {
                 .padding(10)
         
                 Spacer()
-            }.navigationBarBackButtonHidden(true)
+            } .navigationBarBackButtonHidden(true)
             .background(Color("Background_color"))
             
             
         .onAppear(perform: {
                 viewModel.didRegister = false
             })
-   
-    
 
     }
 

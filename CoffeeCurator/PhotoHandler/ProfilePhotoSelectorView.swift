@@ -18,11 +18,15 @@ struct ProfilePhotoSelectorView: View {
     
     
     var body: some View {
+        ZStack{
+            Color("Background_color")
+                .ignoresSafeArea(.all)
             VStack{
+                Spacer()
                 Text("Let's upload your profile picture!")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(Color("DarkBlue"))
+                .font(Font.custom("Cormorant-Medium", size: 28))
+                .multilineTextAlignment(.center)
+                    .foregroundColor(Color("champagne_button"))
                     .padding()
                 
                 Button(action: { isShowingPhotoPicker.toggle() }, label: {
@@ -32,11 +36,8 @@ struct ProfilePhotoSelectorView: View {
                                 .resizable()
                                 .modifier(ProfilePhotoModifier())
                         } else {
-                            Text("Click Plus to Upload Your Picture")
-                                .font(.largeTitle)
-                                .bold()
                             Image(systemName: "plus")
-                                .foregroundColor(Color("Background_color"))
+                                .foregroundColor(Color("champagne_button"))
 //                                .renderingMode(.template)
                                 .modifier(ProfilePhotoModifier())
                         }
@@ -46,9 +47,9 @@ struct ProfilePhotoSelectorView: View {
                     
                 })
 
-                Text(profilePicture == nil ? "Select a profile photo" : "Great! Tap below to continue")
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(.white)
+                Text(profilePicture == nil ? "Click Plus to Upload Your Picture" : "Great! Tap below to continue")
+                    .font(Font.custom("Cormorant-Regular", size: 22))
+                    .foregroundColor(Color("champagne_button"))
                 
                 if let selectedPicture = selectedPicture {
                     Button(action: {
@@ -64,11 +65,9 @@ struct ProfilePhotoSelectorView: View {
                                         .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: 0)
                 }
                 Spacer()
-            }
-               
-            
-        
-        
+            }.navigationBarHidden(true)
+        }
+             
     }
 }
 
