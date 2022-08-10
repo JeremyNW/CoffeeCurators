@@ -65,9 +65,9 @@ struct ContentView: View {
                     }
                     .tag(2)
                 
-            }.accentColor(.gray)
+            }.accentColor(Color("champagne_button"))
                 .onAppear{
-            UITabBar.appearance().barTintColor = .white
+                    UITabBar.appearance().barTintColor = .white
                 }
         }
 }

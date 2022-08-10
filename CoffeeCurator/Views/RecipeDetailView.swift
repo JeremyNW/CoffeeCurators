@@ -14,6 +14,7 @@ struct RecipeDetailView: View {
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
     @State private var recipeName = ""
     @State private var directions = ""
+    @State private var userID = ""
     
  
     
@@ -77,6 +78,6 @@ struct RecipeDetailView: View {
 
 struct RecipeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeDetailView(recipe: .init(coffeeName: "coffee", directions: "directions"))
+        RecipeDetailView(recipe: .init(coffeeName: "coffee", directions: "directions", userID: "userID"))
     }
 }

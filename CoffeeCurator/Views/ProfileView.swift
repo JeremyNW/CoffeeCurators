@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct ProfileView: View {
+struct ProfileTab: View {
     
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
     
@@ -17,7 +17,6 @@ struct ProfileView: View {
     
     var body: some View {
         NavigationView{
-         
                VStack {
                    Text("Profile")
                        .font(Font.custom("Cormorant-SemiBold", size: 30))
@@ -38,7 +37,6 @@ struct ProfileView: View {
                            .foregroundColor(.white)
                    }
                    List {
-                       Section("My Custom Recipes"){
                        ForEach(0..<10) { recipe in
                            NavigationLink{
 
@@ -63,8 +61,9 @@ struct ProfileView: View {
                     }
                 }
             }
-        } .onDelete(perform: viewModel.delete)
+//        }
                 .listRowBackground(Color("Background_color"))
+                      
                        }.foregroundColor(.white)
                        
                    }.listStyle(.plain)
@@ -77,8 +76,8 @@ struct ProfileView: View {
                            .padding()
                                .background(Color("champagne_button"))
                                .cornerRadius(30)
-                               .font((.system(size: 15, weight: .semibold, design: .default))
-                               )
+                               .font(Font.custom("Cormorant-SemiBold", size: 16))
+                               .foregroundColor(Color("Background_color"))
                        
                    }
                    .padding(30)
@@ -93,6 +92,6 @@ struct ProfileView: View {
 
 struct ProfileTab_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileTab()
     }
 }

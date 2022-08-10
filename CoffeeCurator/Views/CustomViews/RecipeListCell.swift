@@ -42,7 +42,7 @@ struct RecipeListCell: View {
         }
         .listRowBackground(Color("Background_color"))
         .overlay(
-            NavigationLink(destination: RecipeDetailView(recipe: .init(coffeeName: recipe.coffeeName, directions: recipe.directions)), isActive: $showDetails) {
+            NavigationLink(destination: RecipeDetailView(recipe: .init(coffeeName: recipe.coffeeName, directions: recipe.directions, userID: recipe.userID)), isActive: $showDetails) {
                 EmptyView()
             }
         )
@@ -54,6 +54,6 @@ struct RecipeListCell: View {
 
 struct RecipeListCell_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeListCell(recipe: .init(coffeeName: "coffee", directions: "directions"))
+        RecipeListCell(recipe: .init(coffeeName: "coffee", directions: "directions", userID: ""))
     }
 }

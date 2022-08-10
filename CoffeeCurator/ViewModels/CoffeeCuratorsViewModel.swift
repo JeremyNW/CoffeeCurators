@@ -38,40 +38,74 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     
     //MARK: FUNCTIONS FOR RECIPES
     
-        func addRecipe(coffeeName: String, directions: String) {
-            guard let uid = Auth.auth().currentUser?.uid else { return }
-            
-
-            let data: [String: Any] = [
-                
-
-                "coffeeName": coffeeName,
-                "directions": directions,
-                "isFavorite": false
-            ]
-            
-            db.collection("recipe").document(uid).setData(data)
-        }
+//        func addRecipe(coffeeName: String, directions: String) {
+//            guard let uid = Auth.auth().currentUser?.uid else { return }
+//            
+//
+//            let data: [String: Any] = [
+//                
+//
+//                "coffeeName": coffeeName,
+//                "directions": directions,
+//                "isFavorite": false
+//            ]
+//            
+//            db.collection("recipe").document(uid).setData(data)
+//        }
     
 
-    func fetchRecipes() {
-        db.collection("recipe").addSnapshotListener { (querySnapshot, error) in
-            guard let documents = querySnapshot?.documents else {
-                print("No recipes")
-                return
+//    func fetchRecipes() {
+//        db.collection("recipe").addSnapshotListener { (querySnapshot, error) in
+//            guard let documents = querySnapshot?.documents else {
+//                print("No recipes")
+//                return
+//            }
+//
+//            self.recipes = documents.map { (queryDocumentSnapshot) -> Recipe in
+//                let data = queryDocumentSnapshot.data()
+//                let id = queryDocumentSnapshot.documentID
+//                let coffeeName = data["coffeeName"] as? String ?? ""
+//                let directions = data["directions"] as? String ?? ""
+//                let isFavorite = data["isFavorite"] as? Bool ?? false
+//                return Recipe(id: id, coffeeName: coffeeName, directions: directions, isFavorite: isFavorite)
+//            }
+//        }
+//    }
+    func addRecipe(coffeeName: String, directions: String) {
+                guard let uid = Auth.auth().currentUser?.uid else { return }
+
+
+                let data: [String: Any] = [
+
+
+                    "coffeeName": coffeeName,
+                    "directions": directions,
+                    "isFavorite": false,
+                    "uid": uid
+                ]
+
+                db.collection("recipe").document().setData(data)
             }
-            
-            self.recipes = documents.map { (queryDocumentSnapshot) -> Recipe in
-                let data = queryDocumentSnapshot.data()
-                let id = queryDocumentSnapshot.documentID
-                let coffeeName = data["coffeeName"] as? String ?? ""
-                let directions = data["directions"] as? String ?? ""
-                let isFavorite = data["isFavorite"] as? Bool ?? false
-                return Recipe(id: id, coffeeName: coffeeName, directions: directions, isFavorite: isFavorite)
+
+
+        func fetchRecipes() {
+            db.collection("recipe").addSnapshotListener { (querySnapshot, error) in
+                guard let documents = querySnapshot?.documents else {
+                    print("No recipes")
+                    return
+                }
+
+                self.recipes = documents.map { (queryDocumentSnapshot) -> Recipe in
+                    let data = queryDocumentSnapshot.data()
+                    let id = queryDocumentSnapshot.documentID
+                    let coffeeName = data["coffeeName"] as? String ?? ""
+                    let directions = data["directions"] as? String ?? ""
+                    let isFavorite = data["isFavorite"] as? Bool ?? false
+                    let userID = data["userID"] as? String ?? ""
+                    return Recipe(id: id, coffeeName: coffeeName, directions: directions, isFavorite: isFavorite, userID: userID)
+                }
             }
         }
-    }
-    
     
     func unlikeRecipe() {
         
@@ -150,7 +184,7 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
             
             guard let user = result?.user else { return }
             self?.userSession = user
-                  self?.fetchUser()
+            self?.fetchUser()
             
         }
     }

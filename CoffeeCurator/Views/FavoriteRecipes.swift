@@ -13,7 +13,6 @@ struct FavoriteRecipes: View {
     
     var body: some View {
         NavigationView{
-            
                 VStack {
                     Text("Favorite Recipes")
                         .font(Font.custom("Cormorant-SemiBold", size: 30))

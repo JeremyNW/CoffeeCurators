@@ -10,19 +10,23 @@ import SwiftUI
 struct NewRecipeView: View {
     
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
+    @Environment(\.dismiss) private var dismiss
     
     @State private var coffeeName = ""
-    @State private var directions = "Recipe: "
+    @State private var directions = ""
     
     var body: some View {
-        VStack {
+        ZStack{
+            Color("Background_color")
+            VStack{
             Text("Create a new recipe!")
-                .font(.system(size: 35))
+                    .font(Font.custom("Cormorant-SemiBold", size: 30))
+                    .foregroundColor(.white)
             ZStack {
                 Image(systemName: "photo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.white)
                 
                 .frame(width: 300)
                 .padding(30)
@@ -33,15 +37,17 @@ struct NewRecipeView: View {
                         .resizable()
                         .frame(width: 20, height: 20)
                 }
-                .offset(x: 115, y: -90)
+                .offset(x: 80, y: -40)
             }
             TextField("Recipe Name...", text: $coffeeName)
+                .font(Font.custom("Cormorant-Regular", size: 16))
                 .textFieldStyle(.roundedBorder)
                 .frame(width: 300)
                 .padding()
             
             TextEditor(text: $directions)
                 .frame(width: 300, height: 200, alignment: .topLeading)
+                .font(Font.custom("Cormorant-Regular", size: 15))
                 .padding()
                 .font(.system(size: 15))
                 .overlay( RoundedRectangle(cornerRadius: 10)
@@ -49,20 +55,27 @@ struct NewRecipeView: View {
                     .frame(width: 300))
             Button{
                 viewModel.addRecipe(coffeeName: coffeeName, directions: directions)
+                dismiss()
             } label: {
                 Text("Save")
+                    .font(Font.custom("Cormorant-SemiBold", size: 16))
                     .padding(15)
-                    .background(Color.white)
+                    .background(Color("champagne_button"))
                     .cornerRadius(20)
-                    .frame(width: 200)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.black, lineWidth: 1)
-                    )
-            }
+                    .frame(height: 100)
+                    .foregroundColor(Color("Background_color"))
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 20)
+////                            .stroke(Color.black, lineWidth: 10)
+//                    )
+                    }
+                }
+                
+            }.background(Color("Background_color"))
+                
+        }
     }
-}
-}
+
 struct NewRecipeView_Previews: PreviewProvider {
     static var previews: some View {
         NewRecipeView()
