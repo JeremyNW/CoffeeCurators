@@ -22,15 +22,28 @@ struct HomeView: View {
     let recipe = [Recipe]()
 
     
+    var filteredRecipes: [Recipe] {
+        if searchText.isEmpty {
+            return viewModel.recipes
+        } else {
+            return viewModel.recipes.filter { $0.coffeeName.localizedCaseInsensitiveContains(searchText) }
+        }
+    }
+    
     var body: some View {
         NavigationView {
+
                 VStack {
+
                     HStack {
                         Text("Coffee Recipes")
-                            .font(Font.custom("Cormorant-Bold", size: 30))
+                            .font(Font.custom("Cormorant-Bold", size: 40))
                             .padding()
                             .font(.title)
                             .foregroundColor(.white)
+                        
+                       
+                        
                     }.toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink (
@@ -40,9 +53,26 @@ struct HomeView: View {
                             })
                         }
                     }
+                    
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(Color("champagne_button"))
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                            TextField("Search ..", text: $searchText)
+                                .autocapitalization(.none)
+                                .font(Font.custom("Cormorant-Bold", size: 30))
+                        } .foregroundColor(Color("Background_color"))
+                            .padding(.leading, 13)
+                        
+                    } .frame(height: 40)
+                        .cornerRadius(13)
+                        .padding()
+                    
+                    
                     List{
                         
-                   ForEach(viewModel.recipes, id: \.self) { recipe in
+                   ForEach(filteredRecipes, id: \.self) { recipe in
                        
                         RecipeListCell(recipe: recipe)
                                     

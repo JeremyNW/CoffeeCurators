@@ -60,7 +60,6 @@ struct SignUpView: View {
                     
                     TextField("Name", text: $userName)
                         .disableAutocorrection(true)
-                        .autocapitalization(.none)
                         .font(Font.custom("Cormorant-Light", size: 18))
                         .padding()
                         .background(Color(.secondarySystemBackground))

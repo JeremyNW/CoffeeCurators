@@ -85,6 +85,19 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
 
     }
     
+    func updateUserRecipe(recipe: Recipe, coffeeName: String, directions: String){
+        
+        let data: [String: Any] = [
+            "coffeeName": self.coffeeName,
+            "directions": self.directions
+        ]
+        guard let recipeId = recipe.id else {return}
+        
+            let docUpdate = db.collection("recipe")
+            .document(recipeId)
+        docUpdate.setData(data)
+    }
+    
     //*************************************
     
     //MARK: FUNCTIONS FOR USERS

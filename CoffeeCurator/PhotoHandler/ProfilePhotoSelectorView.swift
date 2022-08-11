@@ -27,7 +27,7 @@ struct ProfilePhotoSelectorView: View {
                 .font(Font.custom("Cormorant-Medium", size: 28))
                 .multilineTextAlignment(.center)
                     .foregroundColor(Color("champagne_button"))
-                    .padding()
+                    Spacer()
                 
                 Button(action: { isShowingPhotoPicker.toggle() }, label: {
                     ZStack {
@@ -46,7 +46,7 @@ struct ProfilePhotoSelectorView: View {
                 .sheet(isPresented: $isShowingPhotoPicker, onDismiss: loadPhoto, content: { PhotoPicker(selectedPicture: $selectedPicture)
                     
                 })
-
+                .padding()
                 Text(profilePicture == nil ? "Click Plus to Upload Your Picture" : "Great! Tap below to continue")
                     .font(Font.custom("Cormorant-Regular", size: 22))
                     .foregroundColor(Color("champagne_button"))

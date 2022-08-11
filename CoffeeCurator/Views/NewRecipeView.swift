@@ -41,12 +41,14 @@ struct NewRecipeView: View {
 //                        .padding(30)
                     
                     TextField("Recipe Name...", text: $viewModel.coffeeName)
+                        .disableAutocorrection(true)
                         .font(Font.custom("Cormorant-Regular", size: 16))
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 300)
-                        .padding()
+                        .padding(.bottom, 5)
                     
                     TextEditor(text: $viewModel.directions)
+                        .disableAutocorrection(true)
                         .frame(width: 300, height: 200, alignment: .topLeading)
                         .font(Font.custom("Cormorant-Regular", size: 15))
                         .padding()
@@ -60,11 +62,12 @@ struct NewRecipeView: View {
                         dismiss()
                     } label: {
                         Text("Save")
+                            .frame(width: 100)
                             .font(Font.custom("Cormorant-SemiBold", size: 16))
                             .padding(15)
                             .background(Color("champagne_button"))
                             .cornerRadius(20)
-                            .frame(height: 100)
+                        
                             .foregroundColor(Color("Background_color"))
                         
                     }
