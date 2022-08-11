@@ -15,6 +15,7 @@ struct ProfileView: View {
     @State private var profilePictureUrl = ""
     @State private var userName = ""
     
+    
     var body: some View {
         NavigationView{
             VStack{
@@ -74,6 +75,7 @@ struct ProfileView: View {
                 .listStyle(.plain)
                }.onAppear() {
                    self.viewModel.fetchUserData()
+                   self.viewModel.fetchRecipes()
                }
                .background(Color("Background_color"))
                
@@ -82,8 +84,3 @@ struct ProfileView: View {
     }
 
 
-struct ProfileTab_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
-}

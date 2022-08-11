@@ -16,14 +16,20 @@ import FirebaseFirestoreSwift
 class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     
     @Published var recipes = [Recipe]()
+    @Published var recipe: Recipe?
 
     @Published var users = [User]()
     @Published var didRegister = false
     @Published var isFavorite = false
     @Published var didAuthenticateUser = false
+    @Published var didCreateRecipe = false
     @Published var currentUser: User?
     @Published var userSession: FirebaseAuth.User?
     private var tempCurrentUser: FirebaseAuth.User?
+    @Published var coffeeName: String = ""
+    @Published var directions: String = ""
+    
+    @State var recipePictureUrl = ""
     
     let db = Firestore.firestore()
     static let shared = CoffeeCuratorsViewModel()
@@ -40,42 +46,9 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
 
     
     //MARK: FUNCTIONS FOR RECIPES
-    
-//        func addRecipe(coffeeName: String, directions: String) {
-//            guard let uid = Auth.auth().currentUser?.uid else { return }
-//            
-//
-//            let data: [String: Any] = [
-//                
-//
-//                "coffeeName": coffeeName,
-//                "directions": directions,
-//                "isFavorite": false
-//            ]
-//            
-//            db.collection("recipe").document(uid).setData(data)
-//        }
-    
 
-//    func fetchRecipes() {
-//        db.collection("recipe").addSnapshotListener { (querySnapshot, error) in
-//            guard let documents = querySnapshot?.documents else {
-//                print("No recipes")
-//                return
-//            }
-//
-//            self.recipes = documents.map { (queryDocumentSnapshot) -> Recipe in
-//                let data = queryDocumentSnapshot.data()
-//                let id = queryDocumentSnapshot.documentID
-//                let coffeeName = data["coffeeName"] as? String ?? ""
-//                let directions = data["directions"] as? String ?? ""
-//                let isFavorite = data["isFavorite"] as? Bool ?? false
-//                return Recipe(id: id, coffeeName: coffeeName, directions: directions, isFavorite: isFavorite)
-//            }
-//        }
-//    }
     func addRecipe(coffeeName: String, directions: String) {
-                guard let userID = Auth.auth().currentUser?.uid else { return }
+                guard let uid = Auth.auth().currentUser?.uid else { return }
 
 
                 let data: [String: Any] = [
@@ -83,13 +56,13 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
 
                     "coffeeName": coffeeName,
                     "directions": directions,
-                    "isFavorite": false,
-                    "userID": userID
+
                 ]
 
-                db.collection("recipe").document().setData(data)
+                db.collection("recipe").document(uid).setData(data)
+//        self.didCreateRecipe = true
             }
-
+//
 
         func fetchRecipes() {
             db.collection("recipe").addSnapshotListener { (querySnapshot, error) in
@@ -105,7 +78,8 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
                     let directions = data["directions"] as? String ?? ""
                     let isFavorite = data["isFavorite"] as? Bool ?? false
                     let userID = data["userID"] as? String ?? ""
-                    return Recipe(id: id, coffeeName: coffeeName, directions: directions, isFavorite: isFavorite, userID: userID)
+                    let recipePictureUrl = data["recipePictureUrl"] as? String ?? ""
+                    return Recipe(id: id, coffeeName: coffeeName, directions: directions, isFavorite: isFavorite, userID: userID, recipePictureUrl: recipePictureUrl)
                 }
             }
         }
@@ -141,6 +115,19 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
             }
     }
     
+//    func checkIfUserLikedRecipe(recipe: Recipe, completion: @escaping(Bool) -> Void) {
+//        guard let uid = Auth.auth().currentUser?.uid else { return }
+//        guard let tweetId = recipe.id else { return }
+//
+//        Firestore.firestore().collection("recipe")
+//            .document(uid)
+//            .collection("user-likes")
+//            .document(tweetId).getDocument { snapshot, _ in
+//                guard let snapshot = snapshot else { return }
+//                completion(snapshot.exists)
+//            }
+//    }
+    
 //    func likeRecipe(reccipe: Recipe) {
 //
 ////        let recipes: Recipe
@@ -162,35 +149,42 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
 //    }
 //
    
-    
-    
-    
-    func updateRecipe(_ offsets: IndexSet, coffeeName: String, directions: String) {
-
-        let data: [String: Any] = [
-        
-            "coffeeName": coffeeName,
-            "directions": directions,
-    
-        ]
-        offsets.map { recipes[$0] }.forEach { recipe in
-            guard let recipeID = recipe.id else { return }
-            
-            let docUpdate = db.collection("users")
-                .document(recipeID)
-           
-            docUpdate.updateData(data)
-       
-//        { error in
-//                if let error = error {
-//                    print("Error updating document: \(error)")
-//                } else {
-//                    print("Document successfully updated!")
-//                }
+//    func checkIfUserLikedRecipe() {
+//        checkIfUserLikedRecipe(recipe) { isFavorite in
+//            if isFavorite {
+//                self.isFavorite = true
+//            }
 //        }
-    }
-    }
+//    }
     
+    
+    
+//    func updateRecipe(_ offsets: IndexSet, coffeeName: String, directions: String) {
+//
+//        let data: [String: Any] = [
+//
+//            "coffeeName": coffeeName,
+//            "directions": directions,
+//
+//        ]
+//        offsets.map { recipes[$0] }.forEach { recipe in
+//            guard let recipeID = recipe.id else { return }
+//
+//            let docUpdate = db.collection("users")
+//                .document(recipeID)
+//
+//            docUpdate.updateData(data)
+//
+////        { error in
+////                if let error = error {
+////                    print("Error updating document: \(error)")
+////                } else {
+////                    print("Document successfully updated!")
+////                }
+////        }
+//    }
+//    }
+//
     //*************************************
     
     //MARK: FUNCTIONS FOR USERS
@@ -269,11 +263,33 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
         PhotoUploader.uploadPhoto(image: profilePicture) { profilePictureUrl in
             Firestore.firestore().collection("users")
                 .document(uid)
-                .updateData(["profilePictureUrl": profilePictureUrl]) { _ in
+                .updateData([
+                    "profilePictureUrl": profilePictureUrl,
+                    
+                ]) { _ in
                     self.userSession = self.tempCurrentUser
                     self.fetchUser()
                 }
         }
+    }
+    
+    func uploadBeveragePhoto(_ recipePicture: UIImage) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+ 
+        BeveragePhotoUploader.uploadBeveragePhoto(image: recipePicture) { recipePictureUrl in
+            Firestore.firestore().collection("recipe").document()
+                .setData([
+                    "coffeeName": self.coffeeName,
+                    "directions": self.directions,
+                    "isFavorite": false,
+                    "uid": uid,
+                    "recipePictureUrl": recipePictureUrl
+                ])
+
+        }
+        
+
+        
     }
     
     func fetchUser() {
@@ -315,27 +331,6 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
         }
     }
     
-    
-    //    func fetchUser() {
-    //        guard let uid = self.userSession?.uid else {return}
-    //
-    //        UserService.fetchUser(withUid: uid) {user in
-    //
-    //            self.currentUser = user
-    //        }
-    //    }
-    //
-    //    struct UserService {
-    //
-    //        static func fetchUser(withUid uid: String, completion: @escaping(User) -> Void) {
-    //            Firestore.firestore().collection("users")
-    //                .document(uid)
-    //                .getDocument { snapshot, _ in
-    //                guard let user = try? snapshot?.data(as: User.self) else { return }
-    //                completion(user)
-    //            }
-    //        }
-    //    }
 
     
     func signout() {
@@ -344,23 +339,4 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     }
     
 }
-
-
-
-//    func deleteData(recipeToDelete: Recipe) {
-//        let db = Firestore.firestore()
-//        db.collection("recipes").document(recipeToDelete.id!).delete { error in
-//
-//            if error == nil {
-//
-//                DispatchQueue.main.async {
-//
-//                    self.recipes.removeAll { recipe in
-//
-//                    return recipe.id == recipeToDelete.id
-//                }
-//                }
-//            }
-//        }
-//    }
 
