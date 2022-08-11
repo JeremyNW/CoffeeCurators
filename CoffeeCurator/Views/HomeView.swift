@@ -15,7 +15,7 @@ struct HomeView: View {
     //
     //    @State private var coffeeName = ""
     
-    var recipe: Recipe?
+
     
     var body: some View {
         NavigationView {
@@ -29,7 +29,7 @@ struct HomeView: View {
                     }.toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink (
-                                destination: NewRecipeView(recipe: .init(coffeeName: recipe?.coffeeName ?? "", directions: recipe?.directions ?? "", userID: recipe?.userID ?? "", recipePictureUrl: recipe?.recipePictureUrl ?? "")), label: {
+                                destination: NewRecipeView(), label: {
                                 Image(systemName: "plus")
                                     .foregroundColor(.white)
                             })

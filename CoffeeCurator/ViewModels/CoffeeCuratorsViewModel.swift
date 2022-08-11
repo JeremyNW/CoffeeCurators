@@ -114,77 +114,21 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
                 }
             }
     }
+
+    func likeRecipe(recipe: Recipe, favorited: Bool) {
+
+        let data: [String: Any] = [
+            "isFavorite": favorited
+        ]
+        guard let recipeId = recipe.id else {return}
+        
+            let docUpdate = db.collection("recipe")
+            .document(recipeId)
+
+            docUpdate.updateData(data)
+
+    }
     
-//    func checkIfUserLikedRecipe(recipe: Recipe, completion: @escaping(Bool) -> Void) {
-//        guard let uid = Auth.auth().currentUser?.uid else { return }
-//        guard let tweetId = recipe.id else { return }
-//
-//        Firestore.firestore().collection("recipe")
-//            .document(uid)
-//            .collection("user-likes")
-//            .document(tweetId).getDocument { snapshot, _ in
-//                guard let snapshot = snapshot else { return }
-//                completion(snapshot.exists)
-//            }
-//    }
-    
-//    func likeRecipe(reccipe: Recipe) {
-//
-////        let recipes: Recipe
-////        var isFavorite: Bool? = false
-//
-//        likeRecipe(recipe) {
-//            self.recipe.isFavorite = true
-//        }
-//
-//    }
-//
-//
-//    func unlikeRecipe() {
-//
-//        unlikeRecipe(recipe) {
-//            self.recipe.isFavorite = false
-//        }
-//
-//    }
-//
-   
-//    func checkIfUserLikedRecipe() {
-//        checkIfUserLikedRecipe(recipe) { isFavorite in
-//            if isFavorite {
-//                self.isFavorite = true
-//            }
-//        }
-//    }
-    
-    
-    
-//    func updateRecipe(_ offsets: IndexSet, coffeeName: String, directions: String) {
-//
-//        let data: [String: Any] = [
-//
-//            "coffeeName": coffeeName,
-//            "directions": directions,
-//
-//        ]
-//        offsets.map { recipes[$0] }.forEach { recipe in
-//            guard let recipeID = recipe.id else { return }
-//
-//            let docUpdate = db.collection("users")
-//                .document(recipeID)
-//
-//            docUpdate.updateData(data)
-//
-////        { error in
-////                if let error = error {
-////                    print("Error updating document: \(error)")
-////                } else {
-////                    print("Document successfully updated!")
-////                }
-////        }
-//    }
-//    }
-//
     //*************************************
     
     //MARK: FUNCTIONS FOR USERS
@@ -313,6 +257,8 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
             }
         }
     }
+    
+    
     
     struct UserService {
         
