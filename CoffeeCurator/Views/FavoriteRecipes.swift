@@ -19,9 +19,11 @@ struct FavoriteRecipes: View {
 
                         .foregroundColor(.white)
                     List(viewModel.recipes, id: \.self) { recipe in
+                        
+                        if recipe.isFavorite == true {
           
                         RecipeListCell(recipe: recipe)
-                        
+                        }
             }
                 .listRowBackground(Color("Background_color"))
                  

@@ -12,6 +12,8 @@
 		6F8A12AB28A19D1D002B9837 /* ProfilePhotoSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A12AA28A19D1D002B9837 /* ProfilePhotoSelectorView.swift */; };
 		6F8A12AD28A19D35002B9837 /* PhotoUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A12AC28A19D35002B9837 /* PhotoUploader.swift */; };
 		6F8A12B028A1A883002B9837 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6F8A12AF28A1A883002B9837 /* Kingfisher */; };
+		6F8A12B228A460B4002B9837 /* RecipePhotoSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A12B128A460B4002B9837 /* RecipePhotoSelectorView.swift */; };
+		6F8A12B428A46DFC002B9837 /* BeveragePhotoUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A12B328A46DFB002B9837 /* BeveragePhotoUploader.swift */; };
 		6FF8F870289B1488004FB90E /* ZeroPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF8F86F289B1488004FB90E /* ZeroPageView.swift */; };
 		6FF8F872289B2377004FB90E /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF8F871289B2376004FB90E /* SignInView.swift */; };
 		6FF8F874289B271C004FB90E /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF8F873289B271B004FB90E /* SignUpView.swift */; };
@@ -51,6 +53,8 @@
 		6F8A12A828A19CF6002B9837 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		6F8A12AA28A19D1D002B9837 /* ProfilePhotoSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhotoSelectorView.swift; sourceTree = "<group>"; };
 		6F8A12AC28A19D35002B9837 /* PhotoUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUploader.swift; sourceTree = "<group>"; };
+		6F8A12B128A460B4002B9837 /* RecipePhotoSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePhotoSelectorView.swift; sourceTree = "<group>"; };
+		6F8A12B328A46DFB002B9837 /* BeveragePhotoUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeveragePhotoUploader.swift; sourceTree = "<group>"; };
 		6FF8F86F289B1488004FB90E /* ZeroPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPageView.swift; sourceTree = "<group>"; };
 		6FF8F871289B2376004FB90E /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		6FF8F873289B271B004FB90E /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -104,7 +108,9 @@
 			children = (
 				6F8A12A828A19CF6002B9837 /* PhotoPicker.swift */,
 				6F8A12AA28A19D1D002B9837 /* ProfilePhotoSelectorView.swift */,
+				6F8A12B128A460B4002B9837 /* RecipePhotoSelectorView.swift */,
 				6F8A12AC28A19D35002B9837 /* PhotoUploader.swift */,
+				6F8A12B328A46DFB002B9837 /* BeveragePhotoUploader.swift */,
 			);
 			path = PhotoHandler;
 			sourceTree = "<group>";
@@ -306,9 +312,11 @@
 				6F8A12AD28A19D35002B9837 /* PhotoUploader.swift in Sources */,
 				B5665ED32899999200A7942F /* ContentView.swift in Sources */,
 				6FF8F874289B271C004FB90E /* SignUpView.swift in Sources */,
+				6F8A12B428A46DFC002B9837 /* BeveragePhotoUploader.swift in Sources */,
 				B668DC1F28A1997900561322 /* RecipeListCell.swift in Sources */,
 				B668DC1B289C530700561322 /* RecipeDataStore.swift in Sources */,
 				B5665ED12899999200A7942F /* CoffeeCuratorApp.swift in Sources */,
+				6F8A12B228A460B4002B9837 /* RecipePhotoSelectorView.swift in Sources */,
 				B55CF36C289B34FC00E1E5B6 /* HomeView.swift in Sources */,
 				B57B49DC289C3250004370E8 /* ProfileView.swift in Sources */,
 				B668DC15289B232D00561322 /* RecipeDetailView.swift in Sources */,

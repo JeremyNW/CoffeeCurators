@@ -6,81 +6,72 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct RecipeDetailView: View {
     
     var recipe: Recipe
     
-    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
     @State private var coffeeName = ""
     @State private var directions = ""
     @State private var userID = ""
+    @State private var recipePictureUrl = ""
     
     
     var body: some View {
         ZStack{
             Color("Background_color")
-        VStack {
-            Text("\(recipe.coffeeName) Recipe")
-                .font(Font.custom("Cormorant-Bold", size: 30))
-                .foregroundColor(.white)
-            ZStack {
-                Image(systemName: "cup.and.saucer.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+            VStack {
+                Text("\(recipe.coffeeName) Recipe")
+                    .font(Font.custom("Cormorant-SemiBold", size: 30))
                     .foregroundColor(.white)
-                    .frame(width: 300, height: 100)
-                .padding(30)
-                Button{
-                    print("Button pressed")
-                } label: {
-                    Image(systemName: "pencil")
+                
+                VStack{
+                    
+                    
+                    KFImage(URL(string: recipe.recipePictureUrl))
                         .resizable()
-                        .frame(width: 20, height: 20)
+                        .scaledToFill()
+                        .frame(width: 50, height: 50, alignment: .leading)
+                    TextField(recipe.coffeeName, text: $coffeeName)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 300)
+                        .padding()
+                    
+                    TextEditor(text: $directions)
+                        .frame(width: 300, height: 200, alignment: .topLeading)
+                        .padding()
+                        .font(.system(size: 15))
+                        .overlay( RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.secondary, lineWidth: 0.2)
+                            .frame(width: 300))
+                    
                 }
-                .offset(x: 150, y: -90)
+                Button{
+                    viewModel.addRecipe(coffeeName: coffeeName, directions: directions)
+                } label: {
+                    Text("Update Recipe")
+                        .padding(15)
+                        .background(Color("champagne_button"))
+                        .cornerRadius(30)
+                        .font(Font.custom("Cormorant-SemiBold", size: 16))
+                        .foregroundColor(Color("Background_color"))
+                    //                    .overlay(
+                    //                        RoundedRectangle(cornerRadius: 20)
+                    //                            .stroke(Color.black, lineWidth: 1)
+                    //                    )
+                }
+            } .onAppear {
+                coffeeName = recipe.coffeeName
+                directions = recipe.directions
+                recipePictureUrl = recipe.recipePictureUrl
+                self.viewModel.fetchRecipes()
             }
-            VStack{
-
-            TextField(recipe.coffeeName, text: $coffeeName)
-                .textFieldStyle(.roundedBorder)
-                .frame(width: 300)
-                .padding()
-                .font(Font.custom("Cormorant-Regular", size: 20))
-                
-                TextEditor(text: $directions)
-                    .frame(width: 300, height: 200, alignment: .topLeading)
-                    .padding()
-                    .font(Font.custom("Cormorant-Light", size: 16))
-                    .overlay( RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.secondary, lineWidth: 0.2)
-                        .frame(width: 300))
-                
-            }
-            Button{
-                viewModel.addRecipe(coffeeName: coffeeName, directions: directions)
-                dismiss()
-            } label: {
-                Text("Save")
-                    .font(Font.custom("Cormorant-SemiBold", size: 16))
-                    .padding(15)
-                    .background(Color("champagne_button"))
-                    .cornerRadius(20)
-                    .frame(height: 100)
-                    .foregroundColor(Color("Background_color"))
-            }
-        } .onAppear {
-            coffeeName = recipe.coffeeName
-            directions = recipe.directions
-        }
+            
         }
         .background(Color("Background_color"))
     }
+    
 }
 
-struct RecipeDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecipeDetailView(recipe: .init(coffeeName: "coffee", directions: "directions", userID: "userID"))
-    }
-}

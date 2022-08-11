@@ -15,10 +15,12 @@ struct HomeView: View {
     //
     //    @State private var coffeeName = ""
     
+
     @State var searchText = ""
     @State var searching = false
     
     let recipe = [Recipe]()
+
     
     var body: some View {
         NavigationView {
@@ -32,8 +34,7 @@ struct HomeView: View {
                     }.toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink (
-                                destination: NewRecipeView()
-                            , label: {
+                                destination: NewRecipeView(), label: {
                                 Image(systemName: "plus")
                                     .foregroundColor(.white)
                             })
@@ -61,8 +62,3 @@ struct HomeView: View {
 }
 
 
-struct HomeScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}
