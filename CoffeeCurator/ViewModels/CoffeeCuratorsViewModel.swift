@@ -47,22 +47,7 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     
     //MARK: FUNCTIONS FOR RECIPES
 
-    func addRecipe(coffeeName: String, directions: String) {
-                guard let uid = Auth.auth().currentUser?.uid else { return }
 
-
-                let data: [String: Any] = [
-
-
-                    "coffeeName": coffeeName,
-                    "directions": directions,
-
-                ]
-
-                db.collection("recipe").document(uid).setData(data)
-//        self.didCreateRecipe = true
-            }
-//
 
         func fetchRecipes() {
             db.collection("recipe").addSnapshotListener { (querySnapshot, error) in
@@ -85,35 +70,6 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
         }
     //MARK: LIKE?DISLIKE FUNCTIONS
     
-    
-    func likeRecipe(_ recipe: Recipe, completion: @escaping() -> Void) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let recipeId = recipe.id else { return }
-        
-        let userLikesRef = Firestore.firestore().collection("users").document(uid).collection("user-likes")
-        
-        Firestore.firestore().collection("recipe").document(recipeId)
-            .updateData(["isFavorite": recipe.isFavorite ?? true]) { _ in
-                userLikesRef.document(recipeId).setData([:]) { _ in
-                    completion()
-                }
-            }
-    }
-    
-    func unlikeRecipe(_ recipe: Recipe, completion: @escaping() -> Void) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let recipeId = recipe.id else { return }
-   
-        
-        let userLikesRef = Firestore.firestore().collection("users").document(uid).collection("user-likes")
-        
-        Firestore.firestore().collection("recipe").document(recipeId)
-            .updateData(["isFavorite": recipe.isFavorite ?? false]) { _ in
-                userLikesRef.document(recipeId).delete { _ in
-                    completion()
-                }
-            }
-    }
 
     func likeRecipe(recipe: Recipe, favorited: Bool) {
 
@@ -218,7 +174,7 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
     }
     
     func uploadBeveragePhoto(_ recipePicture: UIImage) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let userID = Auth.auth().currentUser?.uid else { return }
  
         BeveragePhotoUploader.uploadBeveragePhoto(image: recipePicture) { recipePictureUrl in
             Firestore.firestore().collection("recipe").document()
@@ -226,7 +182,7 @@ class CoffeeCuratorsViewModel: NSObject, ObservableObject {
                     "coffeeName": self.coffeeName,
                     "directions": self.directions,
                     "isFavorite": false,
-                    "uid": uid,
+                    "userID": userID,
                     "recipePictureUrl": recipePictureUrl
                 ])
 

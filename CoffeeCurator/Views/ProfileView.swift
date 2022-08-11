@@ -86,7 +86,7 @@ struct ProfileView: View {
                                    .frame(width: 100, height: 100)
                                NavigationLink (
                                 destination:
-                                    RecipeDetailView(recipe: .init(coffeeName: recipe.coffeeName, directions: recipe.directions, userID: recipe.userID))
+                                    RecipeDetailView(recipe: .init(coffeeName: recipe.coffeeName, directions: recipe.directions, userID: recipe.userID, recipePictureUrl: recipe.recipePictureUrl))
                                ,label: {
                                    Text(recipe.coffeeName)
                                        .foregroundColor(.white)
