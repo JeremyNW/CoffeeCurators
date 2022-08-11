@@ -54,9 +54,9 @@ struct SignInView: View {
                     }, label: {
                         Text("Sign In")
                             .foregroundColor(Color("champagne_button"))
-                            .font(Font.custom("Cormorant-Regular", size: 18))
+                            .font(Font.custom("Cormorant-Bold", size: 18))
                             .frame(width: 350, height: 40)
-                            .background(Color("sendAnInvite_button_light_brown"))
+                            .background(Color("NoAccountYet"))
                         
                     })  .cornerRadius(40)
                     NavigationLink(destination: SignUpView(), label: {

@@ -22,10 +22,10 @@ struct NewRecipeView: View {
     
     var body: some View {
         VStack {
-            NavigationLink(destination: ProfilePhotoSelectorView(),
-                           isActive: $viewModel.didCreateRecipe,
-                           label: {} )
-            
+//            NavigationLink(destination: ProfilePhotoSelectorView(),
+//                           isActive: $viewModel.didCreateRecipe,
+//                           label: {} )
+//
             ZStack{
                 Color("Background_color")
                 VStack{
