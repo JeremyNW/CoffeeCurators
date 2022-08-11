@@ -33,31 +33,35 @@ struct SignUpView: View {
                            label: {} )
             
             VStack {
+                Spacer()
                 Text("Let's create your profile!")
-                    .font(.title)
-                .bold()
+                .font(Font.custom("Cormorant-Bold", size: 30))
                 .foregroundColor(Color("champagne_button"))
-                .padding()
+                .padding(.bottom, 30)
                 
                 VStack {
                     
                     TextField("Email Address", text: $email)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(20)
-
-                    SecureField("Password", text: $password)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
+                        .font(Font.custom("Cormorant-Light", size: 18))
                         .padding()
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(20)
                     
+                    SecureField("Password", text: $password)
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
+                        .font(Font.custom("Cormorant-Light", size: 18))
+                        .padding()
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(20)
+                        
+                    
                     TextField("Name", text: $userName)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
+                        .font(Font.custom("Cormorant-Light", size: 18))
                         .padding()
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(20)
@@ -72,8 +76,8 @@ struct SignUpView: View {
 
                     }, label: {
                         Text("Create Account")
-                            .font(.headline)
-                            .foregroundColor(.black)
+                            .font(Font.custom("Cormorant-SemiBold", size: 24))
+                            .foregroundColor(Color("Background_color"))
                             .frame(width: 340, height: 50)
                             .background(Color("champagne_button"))
                             .clipShape(Capsule())
@@ -84,8 +88,10 @@ struct SignUpView: View {
                 
                 NavigationLink(destination: SignInView(), label: {
                     Text("Have an account already?")
+                        .font(Font.custom("Cormorant-Medium", size: 20))
                         .foregroundColor(Color("NoAccountYet"))
                 })
+                Spacer()
             }.navigationBarBackButtonHidden(true)
                 
          

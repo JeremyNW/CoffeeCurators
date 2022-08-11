@@ -22,7 +22,7 @@ struct HomeView: View {
                 VStack {
                     HStack {
                         Text("Coffee Recipes")
-                            .font(Font.custom("Cormorant-SemiBold", size: 30))
+                            .font(Font.custom("Cormorant-Bold", size: 30))
                             .padding()
                             .font(.title)
                             .foregroundColor(.white)
