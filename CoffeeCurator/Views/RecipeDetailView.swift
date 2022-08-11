@@ -51,7 +51,7 @@ struct RecipeDetailView: View {
                 Button{
                     viewModel.addRecipe(coffeeName: coffeeName, directions: directions)
                 } label: {
-                    Text("Save")
+                    Text("Update Recipe")
                         .padding(15)
                         .background(Color("champagne_button"))
                         .cornerRadius(30)

@@ -14,14 +14,10 @@ struct NewRecipeView: View {
     @Environment(\.presentationMode) var mode
     @Environment(\.dismiss) private var dismiss
     
-    @State private var selectedPicture: UIImage?
-    @State private var coffeeImage: Image?
-    @State private var picture: Image?
+ 
     @State private var isShowingPhotoPicker = false
-    @State var didCreateRecipe = false
-    @State private var coffeeName = ""
-    @State private var directions = ""
-    @State private var recipePictureUrl = ""
+  
+    
     var recipe: Recipe?
     
     var body: some View {
@@ -37,20 +33,20 @@ struct NewRecipeView: View {
                         .font(Font.custom("Cormorant-SemiBold", size: 30))
                         .foregroundColor(.white)
                     
-                    KFImage(URL(string: recipe?.recipePictureUrl ?? ""))
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 50, height: 50, alignment: .leading)
+//                    KFImage(URL(string: recipe?.recipePictureUrl ?? ""))
+//                        .resizable()
+//                        .scaledToFill()
+//                        .frame(width: 50, height: 50, alignment: .leading)
+//
+//                        .padding(30)
                     
-                        .padding(30)
-                    
-                    TextField("Recipe Name...", text: $coffeeName)
+                    TextField("Recipe Name...", text: $viewModel.coffeeName)
                         .font(Font.custom("Cormorant-Regular", size: 16))
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 300)
                         .padding()
                     
-                    TextEditor(text: $directions)
+                    TextEditor(text: $viewModel.directions)
                         .frame(width: 300, height: 200, alignment: .topLeading)
                         .font(Font.custom("Cormorant-Regular", size: 15))
                         .padding()
@@ -85,7 +81,13 @@ struct NewRecipeView: View {
         
         
         .onAppear(perform: {
-            viewModel.didCreateRecipe = false
+            viewModel.coffeeName.removeAll()
+            viewModel.directions.removeAll()
+//            directions = ""
+//            coffeeName = ""
+//            coffeeName.isEmpty == true
+//            directions.removeAll()
+//            viewModel.didCreateRecipe = false
         })
     }
 }

@@ -32,8 +32,12 @@ struct RecipeListCell: View {
                 } .frame(width: 150, height: 100)
             Button(action: {
                 self.isFavorited.toggle()
+                viewModel.likeRecipe(recipe: recipe, favorited: recipe.isFavorite == false ? true : false)
             }, label: {
-                Image(systemName: self.isFavorited == false ? "heart" : "heart.fill")
+
+                Image(systemName: recipe.isFavorite == false ? "heart" : "heart.fill")
+                    .frame(width: 50, height: 50)
+
                     .foregroundColor(.white)
                     .padding()
 
