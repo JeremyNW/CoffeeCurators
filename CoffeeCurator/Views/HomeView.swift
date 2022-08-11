@@ -15,6 +15,9 @@ struct HomeView: View {
     //
     //    @State private var coffeeName = ""
     
+    @State var searchText = ""
+    @State var searching = false
+    
     let recipe = [Recipe]()
     
     var body: some View {

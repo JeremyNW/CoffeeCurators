@@ -15,31 +15,31 @@ struct RecipeListCell: View {
     
     var body: some View {
         HStack{
-                Image(systemName: "photo")
+                Image("iced_coffee_2_N")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 120, height: 120)
+                    .frame(width: 100, height: 120)
             VStack{
                     Text(recipe.coffeeName)
                     .font(Font.custom("Cormorant-Regular", size: 24))
-                        .font(.title3)
                    .foregroundColor(.white)
                     .padding(.bottom, 5)
                   
                 } .frame(width: 150, height: 100)
+            Spacer()
             Button(action: {
                 self.isFavorited.toggle()
             }, label: {
                 Image(systemName: self.isFavorited == false ? "heart" : "heart.fill")
                     .foregroundColor(.white)
                     .padding()
-
+                    .frame(width: 50, height: 50)
             })
+           
             .buttonStyle(BorderedButtonStyle())
             .frame(width: 50, height: 50)
-        
+            .padding()
         }
         .listRowBackground(Color("Background_color"))
         .overlay(
