@@ -14,13 +14,17 @@ import Firebase
 
 struct AuthenticationLogicView: View {
     
+
+    
     @EnvironmentObject var viewModel: CoffeeCuratorsViewModel
+    
+
     
     var body: some View {
 //                if viewModel.didAuthenticateUser != true {
       
         if viewModel.userSession != nil  {
-           ContentView()
+            ContentView()
         }
         else {
             ZeroPageView()
@@ -31,6 +35,7 @@ struct AuthenticationLogicView: View {
 }
 
 struct ContentView: View {
+
     
     @State private var selection = 0
 
@@ -70,10 +75,4 @@ struct ContentView: View {
                     UITabBar.appearance().barTintColor = .white
                 }
         }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
 }

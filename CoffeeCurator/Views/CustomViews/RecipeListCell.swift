@@ -12,6 +12,7 @@ struct RecipeListCell: View {
     let recipe: Recipe
     @State var isFavorited = false
     @State var showDetails = false
+    @State private var recipePictureUrl = ""
     
     var body: some View {
         HStack{
@@ -42,7 +43,7 @@ struct RecipeListCell: View {
         }
         .listRowBackground(Color("Background_color"))
         .overlay(
-            NavigationLink(destination: RecipeDetailView(recipe: .init(coffeeName: recipe.coffeeName, directions: recipe.directions, userID: recipe.userID)), isActive: $showDetails) {
+            NavigationLink(destination: RecipeDetailView(recipe: .init(coffeeName: recipe.coffeeName, directions: recipe.directions, userID: recipe.userID, recipePictureUrl: recipe.recipePictureUrl)), isActive: $showDetails) {
                 EmptyView()
             }
         )
@@ -52,8 +53,8 @@ struct RecipeListCell: View {
     }
 }
 
-struct RecipeListCell_Previews: PreviewProvider {
-    static var previews: some View {
-        RecipeListCell(recipe: .init(coffeeName: "coffee", directions: "directions", userID: ""))
-    }
-}
+//struct RecipeListCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RecipeListCell(recipe: .init(coffeeName: "coffee", directions: "directions", userID: ""))
+//    }
+//}
