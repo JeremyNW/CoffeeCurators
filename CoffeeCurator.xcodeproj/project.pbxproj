@@ -41,6 +41,7 @@
 		B57B4A0F28A1AEE7004370E8 /* Cormorant-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B57B4A0528A1A4FF004370E8 /* Cormorant-Medium.ttf */; };
 		B57B4A1028A1AEEB004370E8 /* Cormorant-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B57B49E528A1A094004370E8 /* Cormorant-Bold.ttf */; };
 		B57B4A1128A1AEEF004370E8 /* Cormorant-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B57B4A0928A1A5B2004370E8 /* Cormorant-Light.ttf */; };
+		B5D9BBF028A705280087DBA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D9BBEF28A705280087DBA0 /* LaunchScreen.storyboard */; };
 		B668DC11289B14E800561322 /* NewRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668DC10289B14E800561322 /* NewRecipeView.swift */; };
 		B668DC15289B232D00561322 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668DC14289B232D00561322 /* RecipeDetailView.swift */; };
 		B668DC1B289C530700561322 /* RecipeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668DC1A289C530700561322 /* RecipeDataStore.swift */; };
@@ -74,6 +75,7 @@
 		B57B4A0628A1A50C004370E8 /* Cormorant-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cormorant-Regular.ttf"; sourceTree = "<group>"; };
 		B57B4A0728A1A53F004370E8 /* Cormorant-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cormorant-SemiBold.ttf"; sourceTree = "<group>"; };
 		B57B4A0928A1A5B2004370E8 /* Cormorant-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cormorant-Light.ttf"; sourceTree = "<group>"; };
+		B5D9BBEF28A705280087DBA0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B668DC10289B14E800561322 /* NewRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipeView.swift; sourceTree = "<group>"; };
 		B668DC14289B232D00561322 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		B668DC1A289C530700561322 /* RecipeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDataStore.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				B668DC10289B14E800561322 /* NewRecipeView.swift */,
 				B668DC14289B232D00561322 /* RecipeDetailView.swift */,
 				B668DC3728A31C9000561322 /* CustomViews */,
+				B5D9BBEF28A705280087DBA0 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				B57B4A1128A1AEEF004370E8 /* Cormorant-Light.ttf in Resources */,
 				B57B4A1028A1AEEB004370E8 /* Cormorant-Bold.ttf in Resources */,
 				B57B4A0F28A1AEE7004370E8 /* Cormorant-Medium.ttf in Resources */,
+				B5D9BBF028A705280087DBA0 /* LaunchScreen.storyboard in Resources */,
 				B57B4A0E28A1AEE1004370E8 /* Cormorant-Italic.ttf in Resources */,
 				B57B4A0D28A1AEDB004370E8 /* Cormorant-Regular.ttf in Resources */,
 				B57B4A0C28A1AEAE004370E8 /* Cormorant-SemiBold.ttf in Resources */,
@@ -459,6 +463,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
@@ -490,6 +495,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;

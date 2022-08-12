@@ -20,15 +20,7 @@ struct ZeroPageView: View {
         
         NavigationView {
             
-            VStack(alignment:. leading, spacing: 80) {
-                Image("coffee_curator_logo")
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                    .aspectRatio(contentMode: .fill)
-                    .opacity(0.5)
-                    .clipped()
-                    .clipShape(Circle())
-                    
+            VStack(alignment:. leading, spacing: 80) { 
                 Group {
                     HStack {
                         NavigationLink(destination: SignInView(), label: {
