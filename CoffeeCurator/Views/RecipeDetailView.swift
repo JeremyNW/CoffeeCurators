@@ -17,7 +17,7 @@ struct RecipeDetailView: View {
     @State private var directions = ""
     @State private var userID = ""
     @State private var recipePictureUrl = ""
-    
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ZStack{
@@ -28,36 +28,30 @@ struct RecipeDetailView: View {
                     .foregroundColor(.white)
                     .padding()
                 
-                VStack{
-                    
-                    
+                VStack {
                     KFImage(URL(string: recipe.recipePictureUrl))
                         .resizable()
                         .scaledToFill()
                         .frame(width: 250, height: 250, alignment: .leading)
                         .clipped()
                         .cornerRadius(20)
-                        
                         .padding()
                     
-                    TextField(recipe.coffeeName, text: $viewModel.coffeeName)
-                        .font(Font.custom("Cormorant-Regular", size: 15))
+                    TextField(recipe.coffeeName, text: $coffeeName)
+                        .font(Font.custom("Cormorant-Bold", size: 22))
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 300)
                         .padding(.bottom, 5)
                     
-                    TextEditor(text: $viewModel.directions)
-                        .font(Font.custom("Cormorant-Regular", size: 15))
+                    TextEditor(text: $directions)
+                        .font(Font.custom("Cormorant-Medium", size: 18))
                         .frame(width: 300, height: 120, alignment: .topLeading)
                         .padding()
                         .font(.system(size: 15))
-//                        .overlay( RoundedRectangle(cornerRadius: 10)
-//                            .stroke(Color.secondary, lineWidth: 0.2)
-//                            .frame(width: 300))
-                    
                 }
                 Button{
-                    viewModel.updateUserRecipe(recipe: recipe, coffeeName: viewModel.coffeeName, directions: viewModel.directions)
+                    viewModel.updateUserRecipe(recipe: recipe, coffeeName: recipe.coffeeName, directions: recipe.directions)
+                    dismiss()
                 } label: {
                     Text("Update Recipe")
                         .padding(15)
@@ -65,10 +59,6 @@ struct RecipeDetailView: View {
                         .cornerRadius(30)
                         .font(Font.custom("Cormorant-SemiBold", size: 16))
                         .foregroundColor(Color("Background_color"))
-                    //                    .overlay(
-                    //                        RoundedRectangle(cornerRadius: 20)
-                    //                            .stroke(Color.black, lineWidth: 1)
-                    //                    )
                 }
                 Spacer()
                 
@@ -79,7 +69,6 @@ struct RecipeDetailView: View {
                 self.viewModel.fetchRecipes()
             }
             .offset(y: -40)
-            
         }
         .background(Color("Background_color"))
     }

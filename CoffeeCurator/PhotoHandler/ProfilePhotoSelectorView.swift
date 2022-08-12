@@ -24,10 +24,10 @@ struct ProfilePhotoSelectorView: View {
             VStack{
                 Spacer()
                 Text("Let's upload your profile picture!")
-                .font(Font.custom("Cormorant-Medium", size: 28))
-                .multilineTextAlignment(.center)
+                    .font(Font.custom("Cormorant-Medium", size: 28))
+                    .multilineTextAlignment(.center)
                     .foregroundColor(Color("champagne_button"))
-                    Spacer()
+                Spacer()
                 
                 Button(action: { isShowingPhotoPicker.toggle() }, label: {
                     ZStack {
@@ -38,7 +38,6 @@ struct ProfilePhotoSelectorView: View {
                         } else {
                             Image(systemName: "plus")
                                 .foregroundColor(Color("champagne_button"))
-//                                .renderingMode(.template)
                                 .modifier(ProfilePhotoModifier())
                         }
                     }
@@ -46,7 +45,7 @@ struct ProfilePhotoSelectorView: View {
                 .sheet(isPresented: $isShowingPhotoPicker, onDismiss: loadPhoto, content: { PhotoPicker(selectedPicture: $selectedPicture)
                     
                 })
-                .padding()
+                Spacer()
                 Text(profilePicture == nil ? "Click Plus to Upload Your Picture" : "Great! Tap below to continue")
                     .font(Font.custom("Cormorant-Regular", size: 22))
                     .foregroundColor(Color("champagne_button"))
@@ -55,19 +54,18 @@ struct ProfilePhotoSelectorView: View {
                     Button(action: {
                         viewModel.uploadProfilePhoto(selectedPicture) }, label: {
                             Text("Continue")
-                                .font(.headline)
-                                .foregroundColor(.black)
+                                .font(Font.custom("Cormorant-Bold", size: 20))
+                                .foregroundColor(Color("Background_color"))
                                 .frame(width: 340, height: 50)
                                 .background(Color("champagne_button"))
                                 .clipShape(Capsule())
                                 .padding()
                         }) .padding(.top, 24)
-                                        .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: 0)
+                        .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: 0)
                 }
                 Spacer()
             }.navigationBarHidden(true)
         }
-             
     }
 }
 
@@ -77,7 +75,6 @@ private struct ProfilePhotoModifier: ViewModifier {
             .foregroundColor(Color(.systemBlue))
             .scaledToFill()
             .frame(width: 190, height: 140)
-//            .clipShape(Circle())
         
     }
 }

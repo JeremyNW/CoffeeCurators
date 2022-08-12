@@ -16,8 +16,10 @@ struct FavoriteRecipes: View {
                 VStack {
                     Text("Favorite Recipes")
                         .font(Font.custom("Cormorant-SemiBold", size: 30))
-
                         .foregroundColor(.white)
+                    Divider()
+                        .frame(width: 350, height: 1)
+                        .overlay(.gray)
                     List(viewModel.recipes, id: \.self) { recipe in
                         
                         if recipe.isFavorite == true {

@@ -14,18 +14,12 @@ struct NewRecipeView: View {
     @Environment(\.presentationMode) var mode
     @Environment(\.dismiss) private var dismiss
     
- 
     @State private var isShowingPhotoPicker = false
   
-    
     var recipe: Recipe?
     
     var body: some View {
         VStack {
-//            NavigationLink(destination: ProfilePhotoSelectorView(),
-//                           isActive: $viewModel.didCreateRecipe,
-//                           label: {} )
-//
             ZStack{
                 Color("Background_color")
                 VStack{
@@ -33,30 +27,20 @@ struct NewRecipeView: View {
                         .font(Font.custom("Cormorant-SemiBold", size: 30))
                         .foregroundColor(.white)
                     
-//                    KFImage(URL(string: recipe?.recipePictureUrl ?? ""))
-//                        .resizable()
-//                        .scaledToFill()
-//                        .frame(width: 50, height: 50, alignment: .leading)
-//
-//                        .padding(30)
-                    
                     TextField("Recipe Name...", text: $viewModel.coffeeName)
                         .disableAutocorrection(true)
-                        .font(Font.custom("Cormorant-Regular", size: 16))
+                        .font(Font.custom("Cormorant-Bold", size: 22))
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 300)
                         .padding(.bottom, 5)
-                    
+                   
                     TextEditor(text: $viewModel.directions)
                         .disableAutocorrection(true)
                         .frame(width: 300, height: 200, alignment: .topLeading)
-                        .font(Font.custom("Cormorant-Regular", size: 15))
+                        .font(Font.custom("Cormorant-Medium", size: 18))
                         .padding()
                         .font(.system(size: 15))
-                        .overlay( RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.secondary, lineWidth: 0.2)
-                            .frame(width: 300))
-                    
+                   
                     Button{
                         isShowingPhotoPicker.toggle()
                         dismiss()
@@ -67,30 +51,19 @@ struct NewRecipeView: View {
                             .padding(15)
                             .background(Color("champagne_button"))
                             .cornerRadius(20)
-                        
                             .foregroundColor(Color("Background_color"))
-                        
                     }
-                    
-                    
                 }
             }  .sheet(isPresented: $isShowingPhotoPicker, content: {
                 RecipePhotoSelectorView(recipe: recipe)
             })
             .padding(10)
-            
         }
         .background(Color("Background_color"))
-        
         
         .onAppear(perform: {
             viewModel.coffeeName.removeAll()
             viewModel.directions.removeAll()
-//            directions = ""
-//            coffeeName = ""
-//            coffeeName.isEmpty == true
-//            directions.removeAll()
-//            viewModel.didCreateRecipe = false
         })
     }
 }

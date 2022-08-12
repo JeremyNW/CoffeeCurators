@@ -8,10 +8,7 @@
 
 import Foundation
 import SwiftUI
-//import FirebaseAuth
-//import FirebaseStorage
-//import FirebaseFirestore
-//import Firebase
+
 
 struct SignUpView: View {
     @EnvironmentObject var viewModel: CoffeeCuratorsViewModel
@@ -104,22 +101,19 @@ struct SignUpView: View {
             .background(Color("Background_color"))
             
             
-        .onAppear(perform: {
+            .onAppear(perform: {
                 viewModel.didRegister = false
             })
-
     }
-
 }
-    
+
 extension SignUpView {
- func loadPhoto() {
-     
-     guard let selectedPicture = selectedPicture else {return}
-    picture = Image(uiImage: selectedPicture)
- }
+    func loadPhoto() {
+        
+        guard let selectedPicture = selectedPicture else {return}
+        picture = Image(uiImage: selectedPicture)
+    }
 }
-
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {

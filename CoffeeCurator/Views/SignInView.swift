@@ -49,7 +49,7 @@ struct SignInView: View {
                         guard !email.isEmpty, !password.isEmpty else {
                             return
                         }
-                                            viewModel.signIn(email:email, password: password)
+                        viewModel.signIn(email:email, password: password)
                         print("SIGN IN")
                     }, label: {
                         Text("Sign In")
@@ -71,6 +71,6 @@ struct SignInView: View {
                 Spacer()
             } .background(Color("Background_color"))
         }.navigationBarHidden(true)
-
+        
     }
 }

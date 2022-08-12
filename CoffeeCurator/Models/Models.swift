@@ -15,7 +15,7 @@ import FirebaseFirestoreSwift
 
 
 
-struct Recipe: Identifiable, Hashable, Decodable {
+struct Recipe: Identifiable, Hashable, Codable {
     
     @DocumentID var id: String? 
     var coffeeName: String
@@ -26,9 +26,9 @@ struct Recipe: Identifiable, Hashable, Decodable {
 }
 
 
-struct User:  Identifiable, Hashable, Decodable  {
+struct User:  Identifiable, Hashable, Codable {
    
-//    var id: String
+
     @DocumentID var id: String?
     var userName: String
     var profilePictureUrl: String

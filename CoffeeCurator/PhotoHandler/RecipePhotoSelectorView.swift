@@ -26,10 +26,10 @@ struct RecipePhotoSelectorView: View {
             VStack{
                 Spacer()
                 Text("Let's upload your beverage picture!")
-                .font(Font.custom("Cormorant-Medium", size: 28))
-                .multilineTextAlignment(.center)
+                    .font(Font.custom("Cormorant-Medium", size: 28))
+                    .multilineTextAlignment(.center)
                     .foregroundColor(Color("champagne_button"))
-                    .padding()
+                Spacer()
                 
                 Button(action: { isShowingPhotoPicker.toggle() }, label: {
                     ZStack {
@@ -47,32 +47,31 @@ struct RecipePhotoSelectorView: View {
                 .sheet(isPresented: $isShowingPhotoPicker, onDismiss: loadBeveragePhoto, content: { PhotoPicker(selectedPicture: $selectedPicture)
                     
                 })
-
+                Spacer()
                 Text(beveragePicture == nil ? "Click Plus to Upload Your Picture" : "Great! Tap below to continue")
                     .font(Font.custom("Cormorant-Regular", size: 22))
                     .foregroundColor(Color("champagne_button"))
                 
                 if let selectedPicture = selectedPicture {
                     Button(action: {
-                      
+                        
                         viewModel.uploadBeveragePhoto(selectedPicture)
                         
-                       dismiss()
+                        dismiss()
                     }, label: {
-                            Text("Continue")
-                                .font(.headline)
-                                .foregroundColor(.black)
-                                .frame(width: 340, height: 50)
-                                .background(Color("champagne_button"))
-                                .clipShape(Capsule())
-                                .padding()
-                        }) .padding(.top, 24)
-                                        .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: 0)
+                        Text("Continue")
+                            .font(.headline)
+                            .foregroundColor(.black)
+                            .frame(width: 340, height: 50)
+                            .background(Color("champagne_button"))
+                            .clipShape(Capsule())
+                            .padding()
+                    }) .padding(.top, 24)
+                        .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: 0)
                 }
                 Spacer()
             }.navigationBarHidden(true)
         }
-             
     }
 }
 
@@ -82,7 +81,6 @@ private struct BeveragePhotoModifier: ViewModifier {
             .foregroundColor(Color(.systemBlue))
             .scaledToFill()
             .frame(width: 190, height: 140)
-//            .clipShape(Circle())
         
     }
 }

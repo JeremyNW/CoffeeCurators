@@ -7,44 +7,50 @@
 
 import SwiftUI
 import Kingfisher
+import FirebaseFirestore
 
 struct ProfileView: View {
-    let items = Array(1...20).map({"Element \($0)"})
-    let layout = [
+    
+    var layout = [
         GridItem(.adaptive(minimum: 100))
     ]
+    
+    var recipe: Recipe?
+    let db = Firestore.firestore()
     @EnvironmentObject private var viewModel: CoffeeCuratorsViewModel
     
     @State private var profilePictureUrl = ""
     @State private var userName = ""
     
     
+    var filteredRecipes: [Recipe] {
+        viewModel.recipes.filter { $0.userID.localizedCaseInsensitiveContains(viewModel.currentUser?.id ?? "") }
+    }
+    
     var body: some View {
         NavigationView{
             VStack{
-               VStack {
-                   Text("Profile")
-                       .font(Font.custom("Cormorant-Bold", size: 30))
-                       .foregroundColor(.white)
-                     
-                   HStack {
-                       KFImage(URL(string: viewModel.currentUser?.profilePictureUrl ?? self.profilePictureUrl))
-                           .resizable()
-                           .scaledToFill()
-                           .frame(width: 100, height: 100, alignment: .leading)
-
-                       .clipShape(Circle())
-                       .cornerRadius(20)
-                       
-                       Text("\(viewModel.currentUser?.userName ?? self.userName)")
-                       
-                           .font(.title)
-                           .foregroundColor(.white)
+                VStack {
+                    Text("Profile")
+                        .font(Font.custom("Cormorant-Bold", size: 30))
+                        .foregroundColor(.white)
+                    
+                    HStack {
+                        KFImage(URL(string: viewModel.currentUser?.profilePictureUrl ?? self.profilePictureUrl))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 100, alignment: .leading)
+                            .clipShape(Circle())
+                            .cornerRadius(20)
+                        
+                        Text("\(viewModel.currentUser?.userName ?? self.userName)")
+                            .font(Font.custom("Cormorant-Regular", size: 25))
+                            .foregroundColor(.white)
                     }
-                   Divider()
-                       .frame(width: 350, height: 1)
-                       .overlay(.gray)
-               }.navigationBarTitleDisplayMode(.inline)
+                    Divider()
+                        .frame(width: 350, height: 1)
+                        .overlay(.gray)
+                }.navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button(action: {
@@ -60,53 +66,78 @@ struct ProfileView: View {
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink (
-                             destination:
-                                 NewRecipeView()
-                            ,label: {
-                                Image(systemName: "plus")
-                                    .foregroundColor(.white)
-                                    .font(Font.custom("Cormorant-SemiBold", size: 18))
-                            })
-                            .padding()
-                 }
-            }
-                ScrollView {
-                    
-                    LazyVGrid(columns: layout, content: {
-                       ForEach(viewModel.recipes, id: \.self) { recipe in
-                           if recipe.userID == viewModel.currentUser?.id {
-                              // Text(recipe.coffeeName)
-                               VStack{
-                               Image("iced_coffee_2_N")
-                                   .resizable()
-                                   .aspectRatio(contentMode: .fit)
-                                   .border(Color.secondary)
-                                   .cornerRadius(12)
-                                  //.padding()
-                                   .frame(width: 100, height: 100)
-                               NavigationLink (
                                 destination:
-                                    RecipeDetailView(recipe: .init(coffeeName: recipe.coffeeName, directions: recipe.directions, userID: recipe.userID, recipePictureUrl: recipe.recipePictureUrl))
-                               ,label: {
-                                   Text(recipe.coffeeName)
-                                       .foregroundColor(.white)
-                                       .font(Font.custom("Cormorant-SemiBold", size: 18))
-                               })
-                               }
+                                    NewRecipeView()
+                                ,label: {
+                                    Image(systemName: "plus")
+                                        .foregroundColor(.white)
+                                        .font(Font.custom("Cormorant-SemiBold", size: 18))
+                                })
+                            .padding()
+                        }
+                    }
+                ScrollView {
+                    LazyVGrid(columns: layout, content: {
+                        ForEach(filteredRecipes, id: \.self) { recipe in
+                            ZStack{
+                                VStack{
+                                    KFImage(URL(string: recipe.recipePictureUrl))
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .cornerRadius(20)
+                                        .frame(width: 100, height: 100)
+                                        .padding(.top, 2)
+                                    Button(action: {
+                                        deleteGrid(recipe: recipe)
+                                        
+                                    }) {
+                                        Text("x")
+                                            .font(.system(size:15))
+                                            .foregroundColor(.white)
+                                            .frame(width:30, height: 30)
+                                            .background(Color.secondary)
+                                            .cornerRadius(100)
+                                    } .offset(x:35, y:-110)
+                                    NavigationLink (
+                                        destination:
+                                            RecipeDetailView(recipe: .init(coffeeName: recipe.coffeeName, directions: recipe.directions, userID: recipe.userID, recipePictureUrl: recipe.recipePictureUrl))
+                                        ,label: {
+                                            Text(recipe.coffeeName + "\n")
+                                                .lineLimit(2)
+                                                .foregroundColor(.white)
+                                                .font(Font.custom("Cormorant-SemiBold", size: 18))
+                                                .padding(.top, -30)
+                                        })
+                                }
+                            }
+                        }
+                    })
                 }
+                
+            }.onAppear() {
+                self.viewModel.fetchUserData()
+                self.viewModel.fetchRecipes()
             }
-        })
-                }
-                .listRowBackground(Color("Background_color"))
-                .listStyle(.plain)
-               }.onAppear() {
-                   self.viewModel.fetchUserData()
-                   self.viewModel.fetchRecipes()
-               }
-               .background(Color("Background_color"))
-               
-            }
+            .background(Color("Background_color"))
+            
         }
     }
+}
 
-
+extension ProfileView {
+    
+    func deleteGrid(recipe: Recipe) {
+        guard let recipeID = recipe.id else { return }
+        db.collection("recipe").document(recipeID).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+        
+    }
+    
+    
+    
+}
