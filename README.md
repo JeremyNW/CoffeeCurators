@@ -9,5 +9,5 @@ CoffeeCurator is an app that curates different user created coffee recipes. We u
 
 ## Resources:
 
-https://firebase.google.com
-https://swiftpackageindex.com/onevcat/Kingfisher
+- https://firebase.google.com
+- https://swiftpackageindex.com/onevcat/Kingfisher
