@@ -4,7 +4,7 @@
 
 # CoffeeCurator
 
-CoffeeCurator is an app that curates different user created coffee recipes. We used Cloud Firestore to store the users’ authentication data as well as users’ images and custom recipes. We used Kingfisher SDK for uploading photos with their ImagePicker. 
+CoffeeCurator is an app that curates different user created coffee recipes. We used Cloud Firestore to store the users’ authentication data as well as users’ images and custom recipes. We used Kingfisher SDK for uploading photos from the users camera roll. Users are able to persist a favorites list by clicking on the :heart:
 
 
 ## Resources:
